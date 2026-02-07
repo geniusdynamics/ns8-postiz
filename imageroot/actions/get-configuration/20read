@@ -24,3 +24,200 @@ config["lets_encrypt"] = os.getenv("TRAEFIK_LETS_ENCRYPT") == "True"
 
 # Dump the configuration to stdout
 # json.dump(config, fp=sys.stdout)
+if os.path.exists("spotlight.env"): 
+	data = agent.read_envfile("spotlight.env") 
+ 
+if os.path.exists("temporal-ui.env"): 
+	data = agent.read_envfile("temporal-ui.env") 
+	config["TEMPORAL_ADDRESS"] = data.get("TEMPORAL_ADDRESS", "temporal:7233") 
+	config["TEMPORAL_CORS_ORIGINS"] = data.get("TEMPORAL_CORS_ORIGINS", "http://127.0.0.1:3000") 
+else: 
+	config["TEMPORAL_ADDRESS"] = "temporal:7233" 
+	config["TEMPORAL_CORS_ORIGINS"] = "http://127.0.0.1:3000" 
+ 
+if os.path.exists("postiz-postgres.env"): 
+	data = agent.read_envfile("postiz-postgres.env") 
+	config["POSTGRES_PASSWORD"] = data.get("POSTGRES_PASSWORD", "postiz-password") 
+	config["POSTGRES_USER"] = data.get("POSTGRES_USER", "postiz-user") 
+	config["POSTGRES_DB"] = data.get("POSTGRES_DB", "postiz-db-local") 
+else: 
+	config["POSTGRES_PASSWORD"] = "postiz-password" 
+	config["POSTGRES_USER"] = "postiz-user" 
+	config["POSTGRES_DB"] = "postiz-db-local" 
+ 
+if os.path.exists("postiz-redis.env"): 
+	data = agent.read_envfile("postiz-redis.env") 
+ 
+if os.path.exists("temporal-elasticsearch.env"): 
+	data = agent.read_envfile("temporal-elasticsearch.env") 
+	config["ES_JAVA_OPTS"] = data.get("ES_JAVA_OPTS", "-Xms256m -Xmx256m") 
+	config["xpack.security.enabled"] = data.get("xpack.security.enabled", "false") 
+	config["cluster.routing.allocation.disk.threshold_enabled"] = data.get("cluster.routing.allocation.disk.threshold_enabled", "true") 
+	config["cluster.routing.allocation.disk.watermark.low"] = data.get("cluster.routing.allocation.disk.watermark.low", "512mb") 
+	config["cluster.routing.allocation.disk.watermark.high"] = data.get("cluster.routing.allocation.disk.watermark.high", "256mb") 
+	config["cluster.routing.allocation.disk.watermark.flood_stage"] = data.get("cluster.routing.allocation.disk.watermark.flood_stage", "128mb") 
+	config["discovery.type"] = data.get("discovery.type", "single-node") 
+else: 
+	config["cluster.routing.allocation.disk.threshold_enabled"] = "true" 
+	config["cluster.routing.allocation.disk.watermark.low"] = "512mb" 
+	config["cluster.routing.allocation.disk.watermark.high"] = "256mb" 
+	config["cluster.routing.allocation.disk.watermark.flood_stage"] = "128mb" 
+	config["discovery.type"] = "single-node" 
+	config["ES_JAVA_OPTS"] = "-Xms256m -Xmx256m" 
+	config["xpack.security.enabled"] = "false" 
+ 
+if os.path.exists("temporal-postgresql.env"): 
+	data = agent.read_envfile("temporal-postgresql.env") 
+	config["POSTGRES_PASSWORD"] = data.get("POSTGRES_PASSWORD", "temporal") 
+	config["POSTGRES_USER"] = data.get("POSTGRES_USER", "temporal") 
+else: 
+	config["POSTGRES_PASSWORD"] = "temporal" 
+	config["POSTGRES_USER"] = "temporal" 
+ 
+if os.path.exists("temporal.env"): 
+	data = agent.read_envfile("temporal.env") 
+	config["ES_VERSION"] = data.get("ES_VERSION", "v7") 
+	config["TEMPORAL_NAMESPACE"] = data.get("TEMPORAL_NAMESPACE", "default") 
+	config["DB_PORT"] = data.get("DB_PORT", "5432") 
+	config["POSTGRES_USER"] = data.get("POSTGRES_USER", "temporal") 
+	config["POSTGRES_SEEDS"] = data.get("POSTGRES_SEEDS", "temporal-postgresql") 
+	config["ENABLE_ES"] = data.get("ENABLE_ES", "true") 
+	config["DB"] = data.get("DB", "postgres12") 
+	config["POSTGRES_PWD"] = data.get("POSTGRES_PWD", "temporal") 
+	config["DYNAMIC_CONFIG_FILE_PATH"] = data.get("DYNAMIC_CONFIG_FILE_PATH", "config/dynamicconfig/development-sql.yaml") 
+	config["ES_SEEDS"] = data.get("ES_SEEDS", "temporal-elasticsearch") 
+else: 
+	config["POSTGRES_USER"] = "temporal" 
+	config["POSTGRES_SEEDS"] = "temporal-postgresql" 
+	config["ENABLE_ES"] = "true" 
+	config["DB"] = "postgres12" 
+	config["POSTGRES_PWD"] = "temporal" 
+	config["DYNAMIC_CONFIG_FILE_PATH"] = "config/dynamicconfig/development-sql.yaml" 
+	config["ES_SEEDS"] = "temporal-elasticsearch" 
+	config["ES_VERSION"] = "v7" 
+	config["TEMPORAL_NAMESPACE"] = "default" 
+	config["DB_PORT"] = "5432" 
+ 
+if os.path.exists("temporal-admin-tools.env"): 
+	data = agent.read_envfile("temporal-admin-tools.env") 
+	config["TEMPORAL_ADDRESS"] = data.get("TEMPORAL_ADDRESS", "temporal:7233") 
+	config["TEMPORAL_CLI_ADDRESS"] = data.get("TEMPORAL_CLI_ADDRESS", "temporal:7233") 
+else: 
+	config["TEMPORAL_ADDRESS"] = "temporal:7233" 
+	config["TEMPORAL_CLI_ADDRESS"] = "temporal:7233" 
+ 
+if os.path.exists("postiz.env"): 
+	data = agent.read_envfile("postiz.env") 
+	config["DRIBBBLE_CLIENT_ID"] = data.get("DRIBBBLE_CLIENT_ID", "") 
+	config["FACEBOOK_APP_SECRET"] = data.get("FACEBOOK_APP_SECRET", "") 
+	config["DATABASE_URL"] = data.get("DATABASE_URL", "postgresql://postiz-user:postiz-password@postiz-postgres:5432/postiz-db-local") 
+	config["STORAGE_PROVIDER"] = data.get("STORAGE_PROVIDER", "local") 
+	config["UPLOAD_DIRECTORY"] = data.get("UPLOAD_DIRECTORY", "/uploads") 
+	config["X_API_KEY"] = data.get("X_API_KEY", "") 
+	config["THREADS_APP_SECRET"] = data.get("THREADS_APP_SECRET", "") 
+	config["TIKTOK_CLIENT_SECRET"] = data.get("TIKTOK_CLIENT_SECRET", "") 
+	config["SLACK_SECRET"] = data.get("SLACK_SECRET", "") 
+	config["MAIN_URL"] = data.get("MAIN_URL", "http://localhost:4007") 
+	config["LINKEDIN_CLIENT_SECRET"] = data.get("LINKEDIN_CLIENT_SECRET", "") 
+	config["SLACK_SIGNING_SECRET"] = data.get("SLACK_SIGNING_SECRET", "") 
+	config["MASTODON_URL"] = data.get("MASTODON_URL", "https://mastodon.social") 
+	config["MASTODON_CLIENT_SECRET"] = data.get("MASTODON_CLIENT_SECRET", "") 
+	config["NEXT_PUBLIC_POLOTNO"] = data.get("NEXT_PUBLIC_POLOTNO", "") 
+	config["STRIPE_SIGNING_KEY"] = data.get("STRIPE_SIGNING_KEY", "") 
+	config["BACKEND_INTERNAL_URL"] = data.get("BACKEND_INTERNAL_URL", "http://localhost:3000") 
+	config["BEEHIIVE_PUBLICATION_ID"] = data.get("BEEHIIVE_PUBLICATION_ID", "") 
+	config["PINTEREST_CLIENT_ID"] = data.get("PINTEREST_CLIENT_ID", "") 
+	config["DRIBBBLE_CLIENT_SECRET"] = data.get("DRIBBBLE_CLIENT_SECRET", "") 
+	config["SLACK_ID"] = data.get("SLACK_ID", "") 
+	config["NEXT_PUBLIC_DISCORD_SUPPORT"] = data.get("NEXT_PUBLIC_DISCORD_SUPPORT", "") 
+	config["GITHUB_CLIENT_ID"] = data.get("GITHUB_CLIENT_ID", "") 
+	config["DISCORD_CLIENT_SECRET"] = data.get("DISCORD_CLIENT_SECRET", "") 
+	config["OPENAI_API_KEY"] = data.get("OPENAI_API_KEY", "") 
+	config["NEXT_PUBLIC_BACKEND_URL"] = data.get("NEXT_PUBLIC_BACKEND_URL", "http://localhost:4007/api") 
+	config["REDIS_URL"] = data.get("REDIS_URL", "redis://postiz-redis:6379") 
+	config["DISABLE_REGISTRATION"] = data.get("DISABLE_REGISTRATION", "false") 
+	config["RUN_CRON"] = data.get("RUN_CRON", "true") 
+	config["REDDIT_CLIENT_SECRET"] = data.get("REDDIT_CLIENT_SECRET", "") 
+	config["FEE_AMOUNT"] = data.get("FEE_AMOUNT", "0.05") 
+	config["NX_ADD_PLUGINS"] = data.get("NX_ADD_PLUGINS", "false") 
+	config["FRONTEND_URL"] = data.get("FRONTEND_URL", "http://localhost:4007") 
+	config["LINKEDIN_CLIENT_ID"] = data.get("LINKEDIN_CLIENT_ID", "") 
+	config["THREADS_APP_ID"] = data.get("THREADS_APP_ID", "") 
+	config["FACEBOOK_APP_ID"] = data.get("FACEBOOK_APP_ID", "") 
+	config["YOUTUBE_CLIENT_SECRET"] = data.get("YOUTUBE_CLIENT_SECRET", "") 
+	config["TIKTOK_CLIENT_ID"] = data.get("TIKTOK_CLIENT_ID", "") 
+	config["PINTEREST_CLIENT_SECRET"] = data.get("PINTEREST_CLIENT_SECRET", "") 
+	config["MASTODON_CLIENT_ID"] = data.get("MASTODON_CLIENT_ID", "") 
+	config["X_API_SECRET"] = data.get("X_API_SECRET", "") 
+	config["REDDIT_CLIENT_ID"] = data.get("REDDIT_CLIENT_ID", "") 
+	config["DISCORD_CLIENT_ID"] = data.get("DISCORD_CLIENT_ID", "") 
+	config["DISCORD_BOT_TOKEN_ID"] = data.get("DISCORD_BOT_TOKEN_ID", "") 
+	config["API_LIMIT"] = data.get("API_LIMIT", "30") 
+	config["STRIPE_PUBLISHABLE_KEY"] = data.get("STRIPE_PUBLISHABLE_KEY", "") 
+	config["STRIPE_SECRET_KEY"] = data.get("STRIPE_SECRET_KEY", "") 
+	config["STRIPE_SIGNING_KEY_CONNECT"] = data.get("STRIPE_SIGNING_KEY_CONNECT", "") 
+	config["JWT_SECRET"] = data.get("JWT_SECRET", "random string that is unique to every install - just type random characters here!") 
+	config["TEMPORAL_ADDRESS"] = data.get("TEMPORAL_ADDRESS", "temporal:7233") 
+	config["IS_GENERAL"] = data.get("IS_GENERAL", "true") 
+	config["NEXT_PUBLIC_UPLOAD_DIRECTORY"] = data.get("NEXT_PUBLIC_UPLOAD_DIRECTORY", "/uploads") 
+	config["GITHUB_CLIENT_SECRET"] = data.get("GITHUB_CLIENT_SECRET", "") 
+	config["BEEHIIVE_API_KEY"] = data.get("BEEHIIVE_API_KEY", "") 
+	config["YOUTUBE_CLIENT_ID"] = data.get("YOUTUBE_CLIENT_ID", "") 
+else: 
+	config["NEXT_PUBLIC_UPLOAD_DIRECTORY"] = "/uploads" 
+	config["GITHUB_CLIENT_SECRET"] = "" 
+	config["BEEHIIVE_API_KEY"] = "" 
+	config["YOUTUBE_CLIENT_ID"] = "" 
+	config["DRIBBBLE_CLIENT_ID"] = "" 
+	config["FACEBOOK_APP_SECRET"] = "" 
+	config["DATABASE_URL"] = "postgresql://postiz-user:postiz-password@postiz-postgres:5432/postiz-db-local" 
+	config["STORAGE_PROVIDER"] = "local" 
+	config["UPLOAD_DIRECTORY"] = "/uploads" 
+	config["X_API_KEY"] = "" 
+	config["THREADS_APP_SECRET"] = "" 
+	config["TIKTOK_CLIENT_SECRET"] = "" 
+	config["SLACK_SECRET"] = "" 
+	config["MAIN_URL"] = "http://localhost:4007" 
+	config["LINKEDIN_CLIENT_SECRET"] = "" 
+	config["SLACK_SIGNING_SECRET"] = "" 
+	config["MASTODON_URL"] = "https://mastodon.social" 
+	config["MASTODON_CLIENT_SECRET"] = "" 
+	config["NEXT_PUBLIC_POLOTNO"] = "" 
+	config["STRIPE_SIGNING_KEY"] = "" 
+	config["BACKEND_INTERNAL_URL"] = "http://localhost:3000" 
+	config["BEEHIIVE_PUBLICATION_ID"] = "" 
+	config["PINTEREST_CLIENT_ID"] = "" 
+	config["DRIBBBLE_CLIENT_SECRET"] = "" 
+	config["SLACK_ID"] = "" 
+	config["NEXT_PUBLIC_DISCORD_SUPPORT"] = "" 
+	config["GITHUB_CLIENT_ID"] = "" 
+	config["DISCORD_CLIENT_SECRET"] = "" 
+	config["OPENAI_API_KEY"] = "" 
+	config["NEXT_PUBLIC_BACKEND_URL"] = "http://localhost:4007/api" 
+	config["REDIS_URL"] = "redis://postiz-redis:6379" 
+	config["DISABLE_REGISTRATION"] = "false" 
+	config["RUN_CRON"] = "true" 
+	config["REDDIT_CLIENT_SECRET"] = "" 
+	config["FEE_AMOUNT"] = "0.05" 
+	config["NX_ADD_PLUGINS"] = "false" 
+	config["FRONTEND_URL"] = "http://localhost:4007" 
+	config["LINKEDIN_CLIENT_ID"] = "" 
+	config["THREADS_APP_ID"] = "" 
+	config["FACEBOOK_APP_ID"] = "" 
+	config["YOUTUBE_CLIENT_SECRET"] = "" 
+	config["TIKTOK_CLIENT_ID"] = "" 
+	config["PINTEREST_CLIENT_SECRET"] = "" 
+	config["MASTODON_CLIENT_ID"] = "" 
+	config["X_API_SECRET"] = "" 
+	config["REDDIT_CLIENT_ID"] = "" 
+	config["DISCORD_CLIENT_ID"] = "" 
+	config["DISCORD_BOT_TOKEN_ID"] = "" 
+	config["API_LIMIT"] = "30" 
+	config["STRIPE_PUBLISHABLE_KEY"] = "" 
+	config["STRIPE_SECRET_KEY"] = "" 
+	config["STRIPE_SIGNING_KEY_CONNECT"] = "" 
+	config["JWT_SECRET"] = "random string that is unique to every install - just type random characters here!" 
+	config["TEMPORAL_ADDRESS"] = "temporal:7233" 
+	config["IS_GENERAL"] = "true" 
+ 
+json.dump(config, fp=sys.stdout)
