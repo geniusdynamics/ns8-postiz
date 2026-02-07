@@ -49,3 +49,27 @@ temporal-elasticsearch = {
  "cluster.routing.allocation.disk.watermark.high" : cluster.routing.allocation.disk.watermark.high ,
 } 
 agent.write_envfile("temporal-elasticsearch.env", temporal-elasticsearch) 
+DB = data.get("DB", "postgres12") 
+POSTGRES_PWD = data.get("POSTGRES_PWD", "temporal") 
+DYNAMIC_CONFIG_FILE_PATH = data.get("DYNAMIC_CONFIG_FILE_PATH", "config/dynamicconfig/development-sql.yaml") 
+ES_SEEDS = data.get("ES_SEEDS", "temporal-elasticsearch") 
+ES_VERSION = data.get("ES_VERSION", "v7") 
+TEMPORAL_NAMESPACE = data.get("TEMPORAL_NAMESPACE", "default") 
+DB_PORT = data.get("DB_PORT", "5432") 
+POSTGRES_USER = data.get("POSTGRES_USER", "temporal") 
+POSTGRES_SEEDS = data.get("POSTGRES_SEEDS", "temporal-postgresql") 
+ENABLE_ES = data.get("ENABLE_ES", "true") 
+ 
+temporal = { 
+ "DB" : DB ,
+ "POSTGRES_PWD" : POSTGRES_PWD ,
+ "DYNAMIC_CONFIG_FILE_PATH" : DYNAMIC_CONFIG_FILE_PATH ,
+ "ES_SEEDS" : ES_SEEDS ,
+ "ES_VERSION" : ES_VERSION ,
+ "TEMPORAL_NAMESPACE" : TEMPORAL_NAMESPACE ,
+ "DB_PORT" : DB_PORT ,
+ "POSTGRES_USER" : POSTGRES_USER ,
+ "POSTGRES_SEEDS" : POSTGRES_SEEDS ,
+ "ENABLE_ES" : ENABLE_ES ,
+} 
+agent.write_envfile("temporal.env", temporal) 
