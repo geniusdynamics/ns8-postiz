@@ -19,3 +19,11 @@ data = json.load(sys.stdin)
 spotlight = { 
 } 
 agent.write_envfile("spotlight.env", spotlight) 
+TEMPORAL_CORS_ORIGINS = data.get("TEMPORAL_CORS_ORIGINS", "http://127.0.0.1:3000") 
+TEMPORAL_ADDRESS = data.get("TEMPORAL_ADDRESS", "temporal:7233") 
+ 
+temporal-ui = { 
+ "TEMPORAL_CORS_ORIGINS" : TEMPORAL_CORS_ORIGINS ,
+ "TEMPORAL_ADDRESS" : TEMPORAL_ADDRESS ,
+} 
+agent.write_envfile("temporal-ui.env", temporal-ui) 
