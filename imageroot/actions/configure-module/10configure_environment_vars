@@ -31,3 +31,21 @@ agent.write_envfile("temporal-ui.env", temporal-ui)
 postiz-redis = { 
 } 
 agent.write_envfile("postiz-redis.env", postiz-redis) 
+cluster.routing.allocation.disk.watermark.flood_stage = data.get("cluster.routing.allocation.disk.watermark.flood_stage", "128mb") 
+discovery.type = data.get("discovery.type", "single-node") 
+ES_JAVA_OPTS = data.get("ES_JAVA_OPTS", "-Xms256m -Xmx256m") 
+xpack.security.enabled = data.get("xpack.security.enabled", "false") 
+cluster.routing.allocation.disk.threshold_enabled = data.get("cluster.routing.allocation.disk.threshold_enabled", "true") 
+cluster.routing.allocation.disk.watermark.low = data.get("cluster.routing.allocation.disk.watermark.low", "512mb") 
+cluster.routing.allocation.disk.watermark.high = data.get("cluster.routing.allocation.disk.watermark.high", "256mb") 
+ 
+temporal-elasticsearch = { 
+ "cluster.routing.allocation.disk.watermark.flood_stage" : cluster.routing.allocation.disk.watermark.flood_stage ,
+ "discovery.type" : discovery.type ,
+ "ES_JAVA_OPTS" : ES_JAVA_OPTS ,
+ "xpack.security.enabled" : xpack.security.enabled ,
+ "cluster.routing.allocation.disk.threshold_enabled" : cluster.routing.allocation.disk.threshold_enabled ,
+ "cluster.routing.allocation.disk.watermark.low" : cluster.routing.allocation.disk.watermark.low ,
+ "cluster.routing.allocation.disk.watermark.high" : cluster.routing.allocation.disk.watermark.high ,
+} 
+agent.write_envfile("temporal-elasticsearch.env", temporal-elasticsearch) 
