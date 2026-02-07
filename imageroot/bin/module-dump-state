@@ -12,3 +12,5 @@ if ! systemctl --user -q is-active postiz.service; then
 fi
 echo "Dumping  postgres database"
 podman exec postiz-postgres-app pg_dump -U postgres --format=c  postiz-postgres > postiz-postgres.pg_dump
+echo "Dumping  postgres database"
+podman exec temporal-postgresql-app pg_dump -U postgres --format=c  temporal-postgresql > temporal-postgresql.pg_dump
