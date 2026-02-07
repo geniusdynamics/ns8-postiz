@@ -1,0 +1,30 @@
+#
+# Copyright (C) 2022 Nethesis S.r.l.
+# SPDX-License-Identifier: GPL-3.0-or-later
+#
+
+[Unit]
+Description=Podman  postiz-postgres-app.service
+BindsTo=postiz.service
+After=postiz.service
+
+[Service]
+Environment=PODMAN_SYSTEMD_UNIT=%n
+EnvironmentFile=%S/state/environment
+EnvironmentFile=-%S/state/smarthost.env
+WorkingDirectory=%S/state
+Restart=always
+TimeoutStopSec=70
+ExecStartPre=/bin/mkdir -p tmp
+ExecStartPre=/bin/rm -f %t/postiz-postgres-app.pid %t/postiz-postgres-app.ctr-id
+ExecStartPre=-runagent discover-smarthost
+ExecStart=/usr/bin/podman run --conmon-pidfile %t/postiz-postgres-app.pid  --cidfile %t/postiz-postgres-app.ctr-id --cgroups=no-conmon  --pod-id-file %t/postiz.pod-id --replace -d --name  postiz-postgres-app  --volume postgres-volume:/var/lib/postgresql/data:Z   --env-file postiz-postgres.env  ${POSTGRES_IMAGE}  
+ExecStop=/usr/bin/podman stop --ignore --cidfile %t/postiz-postgres-app.ctr-id -t 10
+ExecReload=/usr/bin/podman kill -s HUP postiz-postgres-app
+SyslogIdentifier=%u
+ExecStopPost=/usr/bin/podman rm --ignore -f --cidfile %t/postiz-postgres-app.ctr-id
+PIDFile=%t/postiz-postgres-app.pid
+Type=forking
+
+[Install]
+WantedBy=default.target
