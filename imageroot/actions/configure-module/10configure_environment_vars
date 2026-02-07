@@ -13,185 +13,167 @@ import agent
 # If parsing fails, output everything to stderr
 data = json.load(sys.stdin)
 
-#This is specific to you module, so you need to change it accordingly.
-#agent.dump_env()
- 
-spotlight = { 
-} 
-agent.write_envfile("spotlight.env", spotlight) 
-TEMPORAL_CORS_ORIGINS = data.get("TEMPORAL_CORS_ORIGINS", "http://127.0.0.1:3000") 
-TEMPORAL_ADDRESS = data.get("TEMPORAL_ADDRESS", "temporal:7233") 
- 
-temporal-ui = { 
- "TEMPORAL_CORS_ORIGINS" : TEMPORAL_CORS_ORIGINS ,
- "TEMPORAL_ADDRESS" : TEMPORAL_ADDRESS ,
-} 
-agent.write_envfile("temporal-ui.env", temporal-ui) 
- 
-postiz-redis = { 
-} 
-agent.write_envfile("postiz-redis.env", postiz-redis) 
-cluster.routing.allocation.disk.watermark.flood_stage = data.get("cluster.routing.allocation.disk.watermark.flood_stage", "128mb") 
-discovery.type = data.get("discovery.type", "single-node") 
-ES_JAVA_OPTS = data.get("ES_JAVA_OPTS", "-Xms256m -Xmx256m") 
-xpack.security.enabled = data.get("xpack.security.enabled", "false") 
-cluster.routing.allocation.disk.threshold_enabled = data.get("cluster.routing.allocation.disk.threshold_enabled", "true") 
-cluster.routing.allocation.disk.watermark.low = data.get("cluster.routing.allocation.disk.watermark.low", "512mb") 
-cluster.routing.allocation.disk.watermark.high = data.get("cluster.routing.allocation.disk.watermark.high", "256mb") 
- 
-temporal-elasticsearch = { 
- "cluster.routing.allocation.disk.watermark.flood_stage" : cluster.routing.allocation.disk.watermark.flood_stage ,
- "discovery.type" : discovery.type ,
- "ES_JAVA_OPTS" : ES_JAVA_OPTS ,
- "xpack.security.enabled" : xpack.security.enabled ,
- "cluster.routing.allocation.disk.threshold_enabled" : cluster.routing.allocation.disk.threshold_enabled ,
- "cluster.routing.allocation.disk.watermark.low" : cluster.routing.allocation.disk.watermark.low ,
- "cluster.routing.allocation.disk.watermark.high" : cluster.routing.allocation.disk.watermark.high ,
-} 
-agent.write_envfile("temporal-elasticsearch.env", temporal-elasticsearch) 
-DB = data.get("DB", "postgres12") 
-POSTGRES_PWD = data.get("POSTGRES_PWD", "temporal") 
-DYNAMIC_CONFIG_FILE_PATH = data.get("DYNAMIC_CONFIG_FILE_PATH", "config/dynamicconfig/development-sql.yaml") 
-ES_SEEDS = data.get("ES_SEEDS", "temporal-elasticsearch") 
-ES_VERSION = data.get("ES_VERSION", "v7") 
-TEMPORAL_NAMESPACE = data.get("TEMPORAL_NAMESPACE", "default") 
-DB_PORT = data.get("DB_PORT", "5432") 
-POSTGRES_USER = data.get("POSTGRES_USER", "temporal") 
-POSTGRES_SEEDS = data.get("POSTGRES_SEEDS", "temporal-postgresql") 
-ENABLE_ES = data.get("ENABLE_ES", "true") 
- 
-temporal = { 
- "DB" : DB ,
- "POSTGRES_PWD" : POSTGRES_PWD ,
- "DYNAMIC_CONFIG_FILE_PATH" : DYNAMIC_CONFIG_FILE_PATH ,
- "ES_SEEDS" : ES_SEEDS ,
- "ES_VERSION" : ES_VERSION ,
- "TEMPORAL_NAMESPACE" : TEMPORAL_NAMESPACE ,
- "DB_PORT" : DB_PORT ,
- "POSTGRES_USER" : POSTGRES_USER ,
- "POSTGRES_SEEDS" : POSTGRES_SEEDS ,
- "ENABLE_ES" : ENABLE_ES ,
-} 
-agent.write_envfile("temporal.env", temporal) 
-TEMPORAL_ADDRESS = data.get("TEMPORAL_ADDRESS", "temporal:7233") 
-TEMPORAL_CLI_ADDRESS = data.get("TEMPORAL_CLI_ADDRESS", "temporal:7233") 
- 
-temporal-admin-tools = { 
- "TEMPORAL_ADDRESS" : TEMPORAL_ADDRESS ,
- "TEMPORAL_CLI_ADDRESS" : TEMPORAL_CLI_ADDRESS ,
-} 
-agent.write_envfile("temporal-admin-tools.env", temporal-admin-tools) 
-JWT_SECRET = data.get("JWT_SECRET", "random string that is unique to every install - just type random characters here!") 
-TEMPORAL_ADDRESS = data.get("TEMPORAL_ADDRESS", "temporal:7233") 
-IS_GENERAL = data.get("IS_GENERAL", "true") 
-NEXT_PUBLIC_UPLOAD_DIRECTORY = data.get("NEXT_PUBLIC_UPLOAD_DIRECTORY", "/uploads") 
-GITHUB_CLIENT_SECRET = data.get("GITHUB_CLIENT_SECRET", "") 
-BEEHIIVE_API_KEY = data.get("BEEHIIVE_API_KEY", "") 
-YOUTUBE_CLIENT_ID = data.get("YOUTUBE_CLIENT_ID", "") 
-DRIBBBLE_CLIENT_ID = data.get("DRIBBBLE_CLIENT_ID", "") 
-FACEBOOK_APP_SECRET = data.get("FACEBOOK_APP_SECRET", "") 
-DATABASE_URL = data.get("DATABASE_URL", "postgresql://postiz-user:postiz-password@postiz-postgres:5432/postiz-db-local") 
-STORAGE_PROVIDER = data.get("STORAGE_PROVIDER", "local") 
-UPLOAD_DIRECTORY = data.get("UPLOAD_DIRECTORY", "/uploads") 
-X_API_KEY = data.get("X_API_KEY", "") 
-THREADS_APP_SECRET = data.get("THREADS_APP_SECRET", "") 
-TIKTOK_CLIENT_SECRET = data.get("TIKTOK_CLIENT_SECRET", "") 
-SLACK_SECRET = data.get("SLACK_SECRET", "") 
-MAIN_URL = data.get("MAIN_URL", "http://localhost:4007") 
-LINKEDIN_CLIENT_SECRET = data.get("LINKEDIN_CLIENT_SECRET", "") 
-SLACK_SIGNING_SECRET = data.get("SLACK_SIGNING_SECRET", "") 
-MASTODON_URL = data.get("MASTODON_URL", "https://mastodon.social") 
-MASTODON_CLIENT_SECRET = data.get("MASTODON_CLIENT_SECRET", "") 
-NEXT_PUBLIC_POLOTNO = data.get("NEXT_PUBLIC_POLOTNO", "") 
-STRIPE_SIGNING_KEY = data.get("STRIPE_SIGNING_KEY", "") 
-BACKEND_INTERNAL_URL = data.get("BACKEND_INTERNAL_URL", "http://localhost:3000") 
-BEEHIIVE_PUBLICATION_ID = data.get("BEEHIIVE_PUBLICATION_ID", "") 
-PINTEREST_CLIENT_ID = data.get("PINTEREST_CLIENT_ID", "") 
-DRIBBBLE_CLIENT_SECRET = data.get("DRIBBBLE_CLIENT_SECRET", "") 
-SLACK_ID = data.get("SLACK_ID", "") 
-NEXT_PUBLIC_DISCORD_SUPPORT = data.get("NEXT_PUBLIC_DISCORD_SUPPORT", "") 
-GITHUB_CLIENT_ID = data.get("GITHUB_CLIENT_ID", "") 
-DISCORD_CLIENT_SECRET = data.get("DISCORD_CLIENT_SECRET", "") 
-OPENAI_API_KEY = data.get("OPENAI_API_KEY", "") 
-NEXT_PUBLIC_BACKEND_URL = data.get("NEXT_PUBLIC_BACKEND_URL", "http://localhost:4007/api") 
-REDIS_URL = data.get("REDIS_URL", "redis://postiz-redis:6379") 
-DISABLE_REGISTRATION = data.get("DISABLE_REGISTRATION", "false") 
-RUN_CRON = data.get("RUN_CRON", "true") 
-REDDIT_CLIENT_SECRET = data.get("REDDIT_CLIENT_SECRET", "") 
-FEE_AMOUNT = data.get("FEE_AMOUNT", "0.05") 
-NX_ADD_PLUGINS = data.get("NX_ADD_PLUGINS", "false") 
-FRONTEND_URL = data.get("FRONTEND_URL", "http://localhost:4007") 
-LINKEDIN_CLIENT_ID = data.get("LINKEDIN_CLIENT_ID", "") 
-THREADS_APP_ID = data.get("THREADS_APP_ID", "") 
-FACEBOOK_APP_ID = data.get("FACEBOOK_APP_ID", "") 
-YOUTUBE_CLIENT_SECRET = data.get("YOUTUBE_CLIENT_SECRET", "") 
-TIKTOK_CLIENT_ID = data.get("TIKTOK_CLIENT_ID", "") 
-PINTEREST_CLIENT_SECRET = data.get("PINTEREST_CLIENT_SECRET", "") 
-MASTODON_CLIENT_ID = data.get("MASTODON_CLIENT_ID", "") 
-X_API_SECRET = data.get("X_API_SECRET", "") 
-REDDIT_CLIENT_ID = data.get("REDDIT_CLIENT_ID", "") 
-DISCORD_CLIENT_ID = data.get("DISCORD_CLIENT_ID", "") 
-DISCORD_BOT_TOKEN_ID = data.get("DISCORD_BOT_TOKEN_ID", "") 
-API_LIMIT = data.get("API_LIMIT", "30") 
-STRIPE_PUBLISHABLE_KEY = data.get("STRIPE_PUBLISHABLE_KEY", "") 
-STRIPE_SECRET_KEY = data.get("STRIPE_SECRET_KEY", "") 
-STRIPE_SIGNING_KEY_CONNECT = data.get("STRIPE_SIGNING_KEY_CONNECT", "") 
- 
-postiz = { 
- "JWT_SECRET" : JWT_SECRET ,
- "TEMPORAL_ADDRESS" : TEMPORAL_ADDRESS ,
- "IS_GENERAL" : IS_GENERAL ,
- "NEXT_PUBLIC_UPLOAD_DIRECTORY" : NEXT_PUBLIC_UPLOAD_DIRECTORY ,
- "GITHUB_CLIENT_SECRET" : GITHUB_CLIENT_SECRET ,
- "BEEHIIVE_API_KEY" : BEEHIIVE_API_KEY ,
- "YOUTUBE_CLIENT_ID" : YOUTUBE_CLIENT_ID ,
- "DRIBBBLE_CLIENT_ID" : DRIBBBLE_CLIENT_ID ,
- "FACEBOOK_APP_SECRET" : FACEBOOK_APP_SECRET ,
- "DATABASE_URL" : DATABASE_URL ,
- "STORAGE_PROVIDER" : STORAGE_PROVIDER ,
- "UPLOAD_DIRECTORY" : UPLOAD_DIRECTORY ,
- "X_API_KEY" : X_API_KEY ,
- "THREADS_APP_SECRET" : THREADS_APP_SECRET ,
- "TIKTOK_CLIENT_SECRET" : TIKTOK_CLIENT_SECRET ,
- "SLACK_SECRET" : SLACK_SECRET ,
- "MAIN_URL" : MAIN_URL ,
- "LINKEDIN_CLIENT_SECRET" : LINKEDIN_CLIENT_SECRET ,
- "SLACK_SIGNING_SECRET" : SLACK_SIGNING_SECRET ,
- "MASTODON_URL" : MASTODON_URL ,
- "MASTODON_CLIENT_SECRET" : MASTODON_CLIENT_SECRET ,
- "NEXT_PUBLIC_POLOTNO" : NEXT_PUBLIC_POLOTNO ,
- "STRIPE_SIGNING_KEY" : STRIPE_SIGNING_KEY ,
- "BACKEND_INTERNAL_URL" : BACKEND_INTERNAL_URL ,
- "BEEHIIVE_PUBLICATION_ID" : BEEHIIVE_PUBLICATION_ID ,
- "PINTEREST_CLIENT_ID" : PINTEREST_CLIENT_ID ,
- "DRIBBBLE_CLIENT_SECRET" : DRIBBBLE_CLIENT_SECRET ,
- "SLACK_ID" : SLACK_ID ,
- "NEXT_PUBLIC_DISCORD_SUPPORT" : NEXT_PUBLIC_DISCORD_SUPPORT ,
- "GITHUB_CLIENT_ID" : GITHUB_CLIENT_ID ,
- "DISCORD_CLIENT_SECRET" : DISCORD_CLIENT_SECRET ,
- "OPENAI_API_KEY" : OPENAI_API_KEY ,
- "NEXT_PUBLIC_BACKEND_URL" : NEXT_PUBLIC_BACKEND_URL ,
- "REDIS_URL" : REDIS_URL ,
- "DISABLE_REGISTRATION" : DISABLE_REGISTRATION ,
- "RUN_CRON" : RUN_CRON ,
- "REDDIT_CLIENT_SECRET" : REDDIT_CLIENT_SECRET ,
- "FEE_AMOUNT" : FEE_AMOUNT ,
- "NX_ADD_PLUGINS" : NX_ADD_PLUGINS ,
- "FRONTEND_URL" : FRONTEND_URL ,
- "LINKEDIN_CLIENT_ID" : LINKEDIN_CLIENT_ID ,
- "THREADS_APP_ID" : THREADS_APP_ID ,
- "FACEBOOK_APP_ID" : FACEBOOK_APP_ID ,
- "YOUTUBE_CLIENT_SECRET" : YOUTUBE_CLIENT_SECRET ,
- "TIKTOK_CLIENT_ID" : TIKTOK_CLIENT_ID ,
- "PINTEREST_CLIENT_SECRET" : PINTEREST_CLIENT_SECRET ,
- "MASTODON_CLIENT_ID" : MASTODON_CLIENT_ID ,
- "X_API_SECRET" : X_API_SECRET ,
- "REDDIT_CLIENT_ID" : REDDIT_CLIENT_ID ,
- "DISCORD_CLIENT_ID" : DISCORD_CLIENT_ID ,
- "DISCORD_BOT_TOKEN_ID" : DISCORD_BOT_TOKEN_ID ,
- "API_LIMIT" : API_LIMIT ,
- "STRIPE_PUBLISHABLE_KEY" : STRIPE_PUBLISHABLE_KEY ,
- "STRIPE_SECRET_KEY" : STRIPE_SECRET_KEY ,
- "STRIPE_SIGNING_KEY_CONNECT" : STRIPE_SIGNING_KEY_CONNECT ,
-} 
-agent.write_envfile("postiz.env", postiz) 
+# This is specific to you module, so you need to change it accordingly.
+# agent.dump_env()
+temporal_address = "backend." + data.get("temporal_host")
+host = data.get("host")
+spotlight = {}
+agent.write_envfile("spotlight.env", spotlight)
+TEMPORAL_CORS_ORIGINS = f"https://{host}"
+TEMPORAL_ADDRESS = temporal_address
+
+temporal_ui = {
+    "TEMPORAL_CORS_ORIGINS": TEMPORAL_CORS_ORIGINS,
+    "TEMPORAL_ADDRESS": TEMPORAL_ADDRESS,
+}
+agent.write_envfile("temporal-ui.env", temporal_ui)
+
+postiz_redis = {}
+agent.write_envfile("postiz-redis.env", postiz_redis)
+
+cluster_routing_allocation_disk_watermark_flood_stage = data.get(
+    "cluster.routing.allocation.disk.watermark.flood_stage", "128mb"
+)
+
+discovery_type = data.get("discovery.type", "single-node")
+
+es_java_opts = data.get("ES_JAVA_OPTS", "-Xms256m -Xmx256m")
+
+xpack_security_enabled = data.get("xpack.security.enabled", "false")
+
+cluster_routing_allocation_disk_threshold_enabled = data.get(
+    "cluster.routing.allocation.disk.threshold_enabled", "true"
+)
+
+cluster_routing_allocation_disk_watermark_low = data.get(
+    "cluster.routing.allocation.disk.watermark.low", "512mb"
+)
+
+cluster_routing_allocation_disk_watermark_high = data.get(
+    "cluster.routing.allocation.disk.watermark.high", "256mb"
+)
+
+temporal_elasticsearch = {
+    "cluster.routing.allocation.disk.watermark.flood_stage": cluster_routing_allocation_disk_watermark_flood_stage,
+    "discovery.type": discovery_type,
+    "ES_JAVA_OPTS": es_java_opts,
+    "xpack.security.enabled": xpack_security_enabled,
+    "cluster.routing.allocation.disk.threshold_enabled": cluster_routing_allocation_disk_threshold_enabled,
+    "cluster.routing.allocation.disk.watermark.low": cluster_routing_allocation_disk_watermark_low,
+    "cluster.routing.allocation.disk.watermark.high": cluster_routing_allocation_disk_watermark_high,
+}
+
+agent.write_envfile("temporal-elasticsearch.env", temporal_elasticsearch)
+
+
+temporal_admin_tools = {
+    "TEMPORAL_ADDRESS": TEMPORAL_ADDRESS,
+    "TEMPORAL_CLI_ADDRESS": TEMPORAL_ADDRESS,
+}
+agent.write_envfile("temporal-admin-tools.env", temporal_admin_tools)
+
+IS_GENERAL = data.get("IS_GENERAL", "true")
+NEXT_PUBLIC_UPLOAD_DIRECTORY = data.get("NEXT_PUBLIC_UPLOAD_DIRECTORY", "/uploads")
+GITHUB_CLIENT_SECRET = data.get("GITHUB_CLIENT_SECRET", "")
+BEEHIIVE_API_KEY = data.get("BEEHIIVE_API_KEY", "")
+YOUTUBE_CLIENT_ID = data.get("YOUTUBE_CLIENT_ID", "")
+DRIBBBLE_CLIENT_ID = data.get("DRIBBBLE_CLIENT_ID", "")
+FACEBOOK_APP_SECRET = data.get("FACEBOOK_APP_SECRET", "")
+STORAGE_PROVIDER = data.get("STORAGE_PROVIDER", "local")
+X_API_KEY = data.get("X_API_KEY", "")
+THREADS_APP_SECRET = data.get("THREADS_APP_SECRET", "")
+TIKTOK_CLIENT_SECRET = data.get("TIKTOK_CLIENT_SECRET", "")
+SLACK_SECRET = data.get("SLACK_SECRET", "")
+MAIN_URL = f"https://{host}"
+LINKEDIN_CLIENT_SECRET = data.get("LINKEDIN_CLIENT_SECRET", "")
+SLACK_SIGNING_SECRET = data.get("SLACK_SIGNING_SECRET", "")
+MASTODON_URL = data.get("MASTODON_URL", "https://mastodon.social")
+MASTODON_CLIENT_SECRET = data.get("MASTODON_CLIENT_SECRET", "")
+NEXT_PUBLIC_POLOTNO = data.get("NEXT_PUBLIC_POLOTNO", "")
+STRIPE_SIGNING_KEY = data.get("STRIPE_SIGNING_KEY", "")
+BACKEND_INTERNAL_URL = f"https://{host}"
+BEEHIIVE_PUBLICATION_ID = data.get("BEEHIIVE_PUBLICATION_ID", "")
+PINTEREST_CLIENT_ID = data.get("PINTEREST_CLIENT_ID", "")
+DRIBBBLE_CLIENT_SECRET = data.get("DRIBBBLE_CLIENT_SECRET", "")
+SLACK_ID = data.get("SLACK_ID", "")
+NEXT_PUBLIC_DISCORD_SUPPORT = data.get("NEXT_PUBLIC_DISCORD_SUPPORT", "")
+GITHUB_CLIENT_ID = data.get("GITHUB_CLIENT_ID", "")
+DISCORD_CLIENT_SECRET = data.get("DISCORD_CLIENT_SECRET", "")
+OPENAI_API_KEY = data.get("OPENAI_API_KEY", "")
+NEXT_PUBLIC_BACKEND_URL = f"https://{host}/api"
+DISABLE_REGISTRATION = data.get("DISABLE_REGISTRATION", "false")
+RUN_CRON = data.get("RUN_CRON", "true")
+REDDIT_CLIENT_SECRET = data.get("REDDIT_CLIENT_SECRET", "")
+FEE_AMOUNT = data.get("FEE_AMOUNT", "0.05")
+NX_ADD_PLUGINS = data.get("NX_ADD_PLUGINS", "false")
+FRONTEND_URL = f"https://{host}"
+LINKEDIN_CLIENT_ID = data.get("LINKEDIN_CLIENT_ID", "")
+THREADS_APP_ID = data.get("THREADS_APP_ID", "")
+FACEBOOK_APP_ID = data.get("FACEBOOK_APP_ID", "")
+YOUTUBE_CLIENT_SECRET = data.get("YOUTUBE_CLIENT_SECRET", "")
+TIKTOK_CLIENT_ID = data.get("TIKTOK_CLIENT_ID", "")
+PINTEREST_CLIENT_SECRET = data.get("PINTEREST_CLIENT_SECRET", "")
+MASTODON_CLIENT_ID = data.get("MASTODON_CLIENT_ID", "")
+X_API_SECRET = data.get("X_API_SECRET", "")
+REDDIT_CLIENT_ID = data.get("REDDIT_CLIENT_ID", "")
+DISCORD_CLIENT_ID = data.get("DISCORD_CLIENT_ID", "")
+DISCORD_BOT_TOKEN_ID = data.get("DISCORD_BOT_TOKEN_ID", "")
+API_LIMIT = data.get("API_LIMIT", "30")
+STRIPE_PUBLISHABLE_KEY = data.get("STRIPE_PUBLISHABLE_KEY", "")
+STRIPE_SECRET_KEY = data.get("STRIPE_SECRET_KEY", "")
+STRIPE_SIGNING_KEY_CONNECT = data.get("STRIPE_SIGNING_KEY_CONNECT", "")
+
+postiz = {
+    "TEMPORAL_ADDRESS": TEMPORAL_ADDRESS,
+    "IS_GENERAL": IS_GENERAL,
+    "NEXT_PUBLIC_UPLOAD_DIRECTORY": NEXT_PUBLIC_UPLOAD_DIRECTORY,
+    "GITHUB_CLIENT_SECRET": GITHUB_CLIENT_SECRET,
+    "BEEHIIVE_API_KEY": BEEHIIVE_API_KEY,
+    "YOUTUBE_CLIENT_ID": YOUTUBE_CLIENT_ID,
+    "DRIBBBLE_CLIENT_ID": DRIBBBLE_CLIENT_ID,
+    "FACEBOOK_APP_SECRET": FACEBOOK_APP_SECRET,
+    "STORAGE_PROVIDER": STORAGE_PROVIDER,
+    "X_API_KEY": X_API_KEY,
+    "THREADS_APP_SECRET": THREADS_APP_SECRET,
+    "TIKTOK_CLIENT_SECRET": TIKTOK_CLIENT_SECRET,
+    "SLACK_SECRET": SLACK_SECRET,
+    "MAIN_URL": MAIN_URL,
+    "LINKEDIN_CLIENT_SECRET": LINKEDIN_CLIENT_SECRET,
+    "SLACK_SIGNING_SECRET": SLACK_SIGNING_SECRET,
+    "MASTODON_URL": MASTODON_URL,
+    "MASTODON_CLIENT_SECRET": MASTODON_CLIENT_SECRET,
+    "NEXT_PUBLIC_POLOTNO": NEXT_PUBLIC_POLOTNO,
+    "STRIPE_SIGNING_KEY": STRIPE_SIGNING_KEY,
+    "BACKEND_INTERNAL_URL": BACKEND_INTERNAL_URL,
+    "BEEHIIVE_PUBLICATION_ID": BEEHIIVE_PUBLICATION_ID,
+    "PINTEREST_CLIENT_ID": PINTEREST_CLIENT_ID,
+    "DRIBBBLE_CLIENT_SECRET": DRIBBBLE_CLIENT_SECRET,
+    "SLACK_ID": SLACK_ID,
+    "NEXT_PUBLIC_DISCORD_SUPPORT": NEXT_PUBLIC_DISCORD_SUPPORT,
+    "GITHUB_CLIENT_ID": GITHUB_CLIENT_ID,
+    "DISCORD_CLIENT_SECRET": DISCORD_CLIENT_SECRET,
+    "OPENAI_API_KEY": OPENAI_API_KEY,
+    "NEXT_PUBLIC_BACKEND_URL": NEXT_PUBLIC_BACKEND_URL,
+    "DISABLE_REGISTRATION": DISABLE_REGISTRATION,
+    "RUN_CRON": RUN_CRON,
+    "REDDIT_CLIENT_SECRET": REDDIT_CLIENT_SECRET,
+    "FEE_AMOUNT": FEE_AMOUNT,
+    "NX_ADD_PLUGINS": NX_ADD_PLUGINS,
+    "FRONTEND_URL": FRONTEND_URL,
+    "LINKEDIN_CLIENT_ID": LINKEDIN_CLIENT_ID,
+    "THREADS_APP_ID": THREADS_APP_ID,
+    "FACEBOOK_APP_ID": FACEBOOK_APP_ID,
+    "YOUTUBE_CLIENT_SECRET": YOUTUBE_CLIENT_SECRET,
+    "TIKTOK_CLIENT_ID": TIKTOK_CLIENT_ID,
+    "PINTEREST_CLIENT_SECRET": PINTEREST_CLIENT_SECRET,
+    "MASTODON_CLIENT_ID": MASTODON_CLIENT_ID,
+    "X_API_SECRET": X_API_SECRET,
+    "REDDIT_CLIENT_ID": REDDIT_CLIENT_ID,
+    "DISCORD_CLIENT_ID": DISCORD_CLIENT_ID,
+    "DISCORD_BOT_TOKEN_ID": DISCORD_BOT_TOKEN_ID,
+    "API_LIMIT": API_LIMIT,
+    "STRIPE_PUBLISHABLE_KEY": STRIPE_PUBLISHABLE_KEY,
+    "STRIPE_SECRET_KEY": STRIPE_SECRET_KEY,
+    "STRIPE_SIGNING_KEY_CONNECT": STRIPE_SIGNING_KEY_CONNECT,
+}
+agent.write_envfile("postiz.env", postiz)
