@@ -5,3 +5,4 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 #
 rm -vf postiz-postgres.pg_dump
+rm -vf temporal-postgresql.pg_dump
