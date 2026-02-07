@@ -32,3 +32,28 @@ podman run \
 
 # Clean up
 rm -rfv restore/ postiz-postgres.pg_dump
+# Create restore directory
+mkdir -vp restore
+
+# Create restore script
+cat - >restore/monica_restore.sh <<'EOS'
+# Read dump file from standard input:
+pg_restore --no-owner --no-privileges -U postgres -d temporal-postgresql
+ec=$?
+docker_temp_server_stop
+exit $ec
+EOS
+
+# Run the restore container
+podman run \
+    --rm \
+    --interactive \
+    --network=none \
+    --volume=./restore:/docker-entrypoint-initdb.d/:Z \
+    --volume=postgres-data:/var/lib/postgresql/data:Z \
+    --replace --name=restore_db \
+    --env-file temporal-postgresql.env \
+    "${POSTGRES_IMAGE}" < temporal-postgresql.pg_dump
+
+# Clean up
+rm -rfv restore/ temporal-postgresql.pg_dump
