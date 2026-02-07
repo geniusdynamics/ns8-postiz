@@ -73,3 +73,11 @@ temporal = {
  "ENABLE_ES" : ENABLE_ES ,
 } 
 agent.write_envfile("temporal.env", temporal) 
+TEMPORAL_ADDRESS = data.get("TEMPORAL_ADDRESS", "temporal:7233") 
+TEMPORAL_CLI_ADDRESS = data.get("TEMPORAL_CLI_ADDRESS", "temporal:7233") 
+ 
+temporal-admin-tools = { 
+ "TEMPORAL_ADDRESS" : TEMPORAL_ADDRESS ,
+ "TEMPORAL_CLI_ADDRESS" : TEMPORAL_CLI_ADDRESS ,
+} 
+agent.write_envfile("temporal-admin-tools.env", temporal-admin-tools) 
