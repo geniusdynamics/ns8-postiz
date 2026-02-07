@@ -20,16 +20,16 @@ container=$(buildah from scratch)
 
 # Reuse existing nodebuilder-postiz container, to speed up builds
 if ! buildah containers --format "{{.ContainerName}}" | grep -q nodebuilder-postiz; then
-    echo "Pulling NodeJS runtime..."
-    buildah from --name nodebuilder-postiz -v "${PWD}:/usr/src:Z" docker.io/library/node:lts
+	echo "Pulling NodeJS runtime..."
+	buildah from --name nodebuilder-postiz -v "${PWD}:/usr/src:Z" docker.io/library/node:lts
 fi
 
 echo "Build static UI files with node..."
 buildah run \
-    --workingdir=/usr/src/ui \
-    --env="NODE_OPTIONS=--openssl-legacy-provider" \
-    nodebuilder-postiz \
-    sh -c "yarn install && yarn build"
+	--workingdir=/usr/src/ui \
+	--env="NODE_OPTIONS=--openssl-legacy-provider" \
+	nodebuilder-postiz \
+	sh -c "yarn install && yarn build"
 
 # Add imageroot directory to the container image
 buildah add "${container}" imageroot /imageroot
@@ -42,11 +42,11 @@ buildah add "${container}" ui/dist /ui
 # rootfull=0 === rootless container
 # tcp-ports-demand=1 number of tcp Port to reserve , 1 is the minimum, can be udp or tcp
 buildah config --entrypoint=/ \
-    --label="org.nethserver.authorizations=traefik@node:routeadm" \
-    --label="org.nethserver.tcp-ports-demand=1" \
-    --label="org.nethserver.rootfull=0" \
-    --label="org.nethserver.images=ghcr.io/gitroomhq/postiz-app:latest ghcr.io/getsentry/spotlight:latest docker.io/temporalio/ui:2.34.0 docker.io/postgres:17-alpine redis:7.2 elasticsearch:7.17.27 docker.io/postgres:16 docker.io/temporalio/auto-setup:1.28.1 docker.io/temporalio/admin-tools:1.28.1-tctl-1.18.4-cli-1.4.1" \
-    "${container}"
+	--label="org.nethserver.authorizations=traefik@node:routeadm" \
+	--label="org.nethserver.tcp-ports-demand=3" \
+	--label="org.nethserver.rootfull=0" \
+	--label="org.nethserver.images=ghcr.io/gitroomhq/postiz-app:latest ghcr.io/getsentry/spotlight:latest docker.io/temporalio/ui:2.34.0 docker.io/postgres:17-alpine docker.io/redis:7.2 docker.io/elasticsearch:7.17.27  docker.io/temporalio/auto-setup:1.28.1 docker.io/temporalio/admin-tools:1.28.1-tctl-1.18.4-cli-1.4.1" \
+	"${container}"
 # Commit the image
 buildah commit "${container}" "${repobase}/${reponame}"
 
@@ -67,11 +67,11 @@ images+=("${repobase}/${reponame}")
 # Setup CI when pushing to Github.
 # Warning! docker::// protocol expects lowercase letters (,,)
 if [[ -n "${CI}" ]]; then
-    # Set output value for Github Actions
-    printf "images=%s\n" "${images[*],,}" >> "${GITHUB_OUTPUT}"
+	# Set output value for Github Actions
+	printf "images=%s\n" "${images[*],,}" >>"${GITHUB_OUTPUT}"
 else
-    # Just print info for manual push
-    printf "Publish the images with:\n\n"
-    for image in "${images[@],,}"; do printf "  buildah push %s docker://%s:%s\n" "${image}" "${image}" "${IMAGETAG:-latest}" ; done
-    printf "\n"
+	# Just print info for manual push
+	printf "Publish the images with:\n\n"
+	for image in "${images[@],,}"; do printf "  buildah push %s docker://%s:%s\n" "${image}" "${image}" "${IMAGETAG:-latest}"; done
+	printf "\n"
 fi

@@ -19,6 +19,7 @@ data = json.load(sys.stdin)
 host = data.get("host")
 h2hs = data.get("http2https", True)
 le = data.get("lets_encrypt", False)
+temporal_host = data.get("temporal_host")
 
 # Talk with agent using file descriptor.
 # Setup configuration from user input.
@@ -31,21 +32,47 @@ agent.set_env("TRAEFIK_LETS_ENCRYPT", le)
 agent.dump_env()
 
 # Find default traefik instance for current node
-default_traefik_id = agent.resolve_agent_id('traefik@node')
+default_traefik_id = agent.resolve_agent_id("traefik@node")
 if default_traefik_id is None:
     sys.exit(2)
+env_tcp_ports = os.environ["TCP_PORTS"].split(",")
 
+frontend = env_tcp_ports[0]
+temporal_ui = env_tcp_ports[1]
+temporal_backend = env_tcp_ports[2]
 response = agent.tasks.run(
-    agent_id=agent.resolve_agent_id('traefik@node'),
-    action='set-route',
+    agent_id=agent.resolve_agent_id("traefik@node"),
+    action="set-route",
     data={
-        'instance': os.environ['MODULE_ID'],
-        'url':  'http://127.0.0.1:' + os.environ["TCP_PORT"],
-        'host': host,
-        'http2https': h2hs,
-        'lets_encrypt': le
+        "instance": os.environ["MODULE_ID"],
+        "url": "http://127.0.0.1:" + frontend,
+        "host": host,
+        "http2https": h2hs,
+        "lets_encrypt": le,
+    },
+)
+response = agent.tasks.run(
+    agent_id=agent.resolve_agent_id("traefik@node"),
+    action="set-route",
+    data={
+        "instance": os.environ["MODULE_ID"] + "-temporal-ui",
+        "url": "http://127.0.0.1:" + temporal_ui,
+        "host": temporal_host,
+        "http2https": h2hs,
+        "lets_encrypt": le,
+    },
+)
+response = agent.tasks.run(
+    agent_id=agent.resolve_agent_id("traefik@node"),
+    action="set-route",
+    data={
+        "instance": os.environ["MODULE_ID"] + "-temporal-backend",
+        "url": "http://127.0.0.1:" + temporal_backend,
+        "host": "backend." + temporal_host,
+        "http2https": h2hs,
+        "lets_encrypt": le,
     },
 )
 
 # Check if traefik configuration has been successfull
-agent.assert_exp(response['exit_code'] == 0)
+agent.assert_exp(response["exit_code"] == 0)
