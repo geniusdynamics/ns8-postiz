@@ -11,9 +11,9 @@ set -e
 # Prepare variables for later use
 images=()
 # The image will be pushed to GitHub container registry
-repobase="${REPOBASE:-ghcr.io/{{ GITHUB_OWNER }}}"
+repobase="${REPOBASE:-ghcr.io/geniusdynamics}"
 # Configure the image name
-reponame="{{ IMAGE_NAME }}"
+reponame="postiz"
 
 # Create a new empty container image
 container=$(buildah from scratch)
@@ -45,7 +45,7 @@ buildah config --entrypoint=/ \
     --label="org.nethserver.authorizations=traefik@node:routeadm" \
     --label="org.nethserver.tcp-ports-demand=1" \
     --label="org.nethserver.rootfull=0" \
-    --label="org.nethserver.images={{ IMAGES }}" \
+    --label="org.nethserver.images=ghcr.io/gitroomhq/postiz-app:latest ghcr.io/getsentry/spotlight:latest docker.io/temporalio/ui:2.34.0 docker.io/postgres:17-alpine redis:7.2 elasticsearch:7.17.27 docker.io/postgres:16 docker.io/temporalio/auto-setup:1.28.1 docker.io/temporalio/admin-tools:1.28.1-tctl-1.18.4-cli-1.4.1" \
     "${container}"
 # Commit the image
 buildah commit "${container}" "${repobase}/${reponame}"
