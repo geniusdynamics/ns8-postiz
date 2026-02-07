@@ -27,3 +27,7 @@ temporal-ui = {
  "TEMPORAL_ADDRESS" : TEMPORAL_ADDRESS ,
 } 
 agent.write_envfile("temporal-ui.env", temporal-ui) 
+ 
+postiz-redis = { 
+} 
+agent.write_envfile("postiz-redis.env", postiz-redis) 
