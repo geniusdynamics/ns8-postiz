@@ -8,11 +8,11 @@
 import agent
 import os
 
-agent.add_public_service(
-    os.environ["MODULE_ID"],
-    [
-        "8969/tcp",
-    ],
-)
+# agent.add_public_service(
+#     os.environ["MODULE_ID"],
+#     [
+#         "8969/tcp",
+#     ],
+# )
 
 # Ignore exit code
