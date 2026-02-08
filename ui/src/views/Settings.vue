@@ -33,6 +33,16 @@
               ref="host"
             >
             </cv-text-input>
+            <cv-text-input
+              :label="$t('settings.temporal_host')"
+              placeholder="temporal.example.org"
+              v-model.trim="temporal_host"
+              class="mg-bottom"
+              :invalid-message="$t(error.temporal_host)"
+              :disabled="loading.getConfiguration || loading.configureModule"
+              ref="temporal_host"
+            >
+            </cv-text-input>
             <cv-toggle
               value="letsEncrypt"
               :label="$t('settings.lets_encrypt')"
@@ -66,6 +76,328 @@
               <cv-accordion-item :open="toggleAccordion[0]">
                 <template slot="title">{{ $t("settings.advanced") }}</template>
                 <template slot="content">
+                  <cv-text-input
+                    :label="$t('settings.is_general')"
+                    v-model="is_general"
+                    class="mg-bottom"
+                    :disabled="loading.getConfiguration || loading.configureModule"
+                  >
+                  </cv-text-input>
+                  <cv-text-input
+                    :label="$t('settings.next_public_upload_directory')"
+                    v-model="next_public_upload_directory"
+                    class="mg-bottom"
+                    :disabled="loading.getConfiguration || loading.configureModule"
+                  >
+                  </cv-text-input>
+                  <cv-text-input
+                    :label="$t('settings.github_client_secret')"
+                    v-model="github_client_secret"
+                    class="mg-bottom"
+                    :disabled="loading.getConfiguration || loading.configureModule"
+                  >
+                  </cv-text-input>
+                  <cv-text-input
+                    :label="$t('settings.beehiive_api_key')"
+                    v-model="beehiive_api_key"
+                    class="mg-bottom"
+                    :disabled="loading.getConfiguration || loading.configureModule"
+                  >
+                  </cv-text-input>
+                  <cv-text-input
+                    :label="$t('settings.youtube_client_id')"
+                    v-model="youtube_client_id"
+                    class="mg-bottom"
+                    :disabled="loading.getConfiguration || loading.configureModule"
+                  >
+                  </cv-text-input>
+                  <cv-text-input
+                    :label="$t('settings.dribbble_client_id')"
+                    v-model="dribbble_client_id"
+                    class="mg-bottom"
+                    :disabled="loading.getConfiguration || loading.configureModule"
+                  >
+                  </cv-text-input>
+                  <cv-text-input
+                    :label="$t('settings.facebook_app_secret')"
+                    v-model="facebook_app_secret"
+                    class="mg-bottom"
+                    :disabled="loading.getConfiguration || loading.configureModule"
+                  >
+                  </cv-text-input>
+                  <cv-text-input
+                    :label="$t('settings.storage_provider')"
+                    v-model="storage_provider"
+                    class="mg-bottom"
+                    :disabled="loading.getConfiguration || loading.configureModule"
+                  >
+                  </cv-text-input>
+                  <cv-text-input
+                    :label="$t('settings.x_api_key')"
+                    v-model="x_api_key"
+                    class="mg-bottom"
+                    :disabled="loading.getConfiguration || loading.configureModule"
+                  >
+                  </cv-text-input>
+                  <cv-text-input
+                    :label="$t('settings.threads_app_secret')"
+                    v-model="threads_app_secret"
+                    class="mg-bottom"
+                    :disabled="loading.getConfiguration || loading.configureModule"
+                  >
+                  </cv-text-input>
+                  <cv-text-input
+                    :label="$t('settings.tiktok_client_secret')"
+                    v-model="tiktok_client_secret"
+                    class="mg-bottom"
+                    :disabled="loading.getConfiguration || loading.configureModule"
+                  >
+                  </cv-text-input>
+                  <cv-text-input
+                    :label="$t('settings.slack_secret')"
+                    v-model="slack_secret"
+                    class="mg-bottom"
+                    :disabled="loading.getConfiguration || loading.configureModule"
+                  >
+                  </cv-text-input>
+                  <cv-text-input
+                    :label="$t('settings.linkedin_client_secret')"
+                    v-model="linkedin_client_secret"
+                    class="mg-bottom"
+                    :disabled="loading.getConfiguration || loading.configureModule"
+                  >
+                  </cv-text-input>
+                  <cv-text-input
+                    :label="$t('settings.slack_signing_secret')"
+                    v-model="slack_signing_secret"
+                    class="mg-bottom"
+                    :disabled="loading.getConfiguration || loading.configureModule"
+                  >
+                  </cv-text-input>
+                  <cv-text-input
+                    :label="$t('settings.mastodon_url')"
+                    v-model="mastodon_url"
+                    class="mg-bottom"
+                    :disabled="loading.getConfiguration || loading.configureModule"
+                  >
+                  </cv-text-input>
+                  <cv-text-input
+                    :label="$t('settings.mastodon_client_secret')"
+                    v-model="mastodon_client_secret"
+                    class="mg-bottom"
+                    :disabled="loading.getConfiguration || loading.configureModule"
+                  >
+                  </cv-text-input>
+                  <cv-text-input
+                    :label="$t('settings.next_public_polotno')"
+                    v-model="next_public_polotno"
+                    class="mg-bottom"
+                    :disabled="loading.getConfiguration || loading.configureModule"
+                  >
+                  </cv-text-input>
+                  <cv-text-input
+                    :label="$t('settings.stripe_signing_key')"
+                    v-model="stripe_signing_key"
+                    class="mg-bottom"
+                    :disabled="loading.getConfiguration || loading.configureModule"
+                  >
+                  </cv-text-input>
+                  <cv-text-input
+                    :label="$t('settings.beehiive_publication_id')"
+                    v-model="beehiive_publication_id"
+                    class="mg-bottom"
+                    :disabled="loading.getConfiguration || loading.configureModule"
+                  >
+                  </cv-text-input>
+                  <cv-text-input
+                    :label="$t('settings.pinterest_client_id')"
+                    v-model="pinterest_client_id"
+                    class="mg-bottom"
+                    :disabled="loading.getConfiguration || loading.configureModule"
+                  >
+                  </cv-text-input>
+                  <cv-text-input
+                    :label="$t('settings.dribbble_client_secret')"
+                    v-model="dribbble_client_secret"
+                    class="mg-bottom"
+                    :disabled="loading.getConfiguration || loading.configureModule"
+                  >
+                  </cv-text-input>
+                  <cv-text-input
+                    :label="$t('settings.slack_id')"
+                    v-model="slack_id"
+                    class="mg-bottom"
+                    :disabled="loading.getConfiguration || loading.configureModule"
+                  >
+                  </cv-text-input>
+                  <cv-text-input
+                    :label="$t('settings.next_public_discord_support')"
+                    v-model="next_public_discord_support"
+                    class="mg-bottom"
+                    :disabled="loading.getConfiguration || loading.configureModule"
+                  >
+                  </cv-text-input>
+                  <cv-text-input
+                    :label="$t('settings.github_client_id')"
+                    v-model="github_client_id"
+                    class="mg-bottom"
+                    :disabled="loading.getConfiguration || loading.configureModule"
+                  >
+                  </cv-text-input>
+                  <cv-text-input
+                    :label="$t('settings.discord_client_secret')"
+                    v-model="discord_client_secret"
+                    class="mg-bottom"
+                    :disabled="loading.getConfiguration || loading.configureModule"
+                  >
+                  </cv-text-input>
+                  <cv-text-input
+                    :label="$t('settings.openai_api_key')"
+                    v-model="openai_api_key"
+                    class="mg-bottom"
+                    :disabled="loading.getConfiguration || loading.configureModule"
+                  >
+                  </cv-text-input>
+                  <cv-text-input
+                    :label="$t('settings.disable_registration')"
+                    v-model="disable_registration"
+                    class="mg-bottom"
+                    :disabled="loading.getConfiguration || loading.configureModule"
+                  >
+                  </cv-text-input>
+                  <cv-text-input
+                    :label="$t('settings.run_cron')"
+                    v-model="run_cron"
+                    class="mg-bottom"
+                    :disabled="loading.getConfiguration || loading.configureModule"
+                  >
+                  </cv-text-input>
+                  <cv-text-input
+                    :label="$t('settings.reddit_client_secret')"
+                    v-model="reddit_client_secret"
+                    class="mg-bottom"
+                    :disabled="loading.getConfiguration || loading.configureModule"
+                  >
+                  </cv-text-input>
+                  <cv-text-input
+                    :label="$t('settings.fee_amount')"
+                    v-model="fee_amount"
+                    class="mg-bottom"
+                    :disabled="loading.getConfiguration || loading.configureModule"
+                  >
+                  </cv-text-input>
+                  <cv-text-input
+                    :label="$t('settings.nx_add_plugins')"
+                    v-model="nx_add_plugins"
+                    class="mg-bottom"
+                    :disabled="loading.getConfiguration || loading.configureModule"
+                  >
+                  </cv-text-input>
+                  <cv-text-input
+                    :label="$t('settings.linkedin_client_id')"
+                    v-model="linkedin_client_id"
+                    class="mg-bottom"
+                    :disabled="loading.getConfiguration || loading.configureModule"
+                  >
+                  </cv-text-input>
+                  <cv-text-input
+                    :label="$t('settings.threads_app_id')"
+                    v-model="threads_app_id"
+                    class="mg-bottom"
+                    :disabled="loading.getConfiguration || loading.configureModule"
+                  >
+                  </cv-text-input>
+                  <cv-text-input
+                    :label="$t('settings.facebook_app_id')"
+                    v-model="facebook_app_id"
+                    class="mg-bottom"
+                    :disabled="loading.getConfiguration || loading.configureModule"
+                  >
+                  </cv-text-input>
+                  <cv-text-input
+                    :label="$t('settings.youtube_client_secret')"
+                    v-model="youtube_client_secret"
+                    class="mg-bottom"
+                    :disabled="loading.getConfiguration || loading.configureModule"
+                  >
+                  </cv-text-input>
+                  <cv-text-input
+                    :label="$t('settings.tiktok_client_id')"
+                    v-model="tiktok_client_id"
+                    class="mg-bottom"
+                    :disabled="loading.getConfiguration || loading.configureModule"
+                  >
+                  </cv-text-input>
+                  <cv-text-input
+                    :label="$t('settings.pinterest_client_secret')"
+                    v-model="pinterest_client_secret"
+                    class="mg-bottom"
+                    :disabled="loading.getConfiguration || loading.configureModule"
+                  >
+                  </cv-text-input>
+                  <cv-text-input
+                    :label="$t('settings.mastodon_client_id')"
+                    v-model="mastodon_client_id"
+                    class="mg-bottom"
+                    :disabled="loading.getConfiguration || loading.configureModule"
+                  >
+                  </cv-text-input>
+                  <cv-text-input
+                    :label="$t('settings.x_api_secret')"
+                    v-model="x_api_secret"
+                    class="mg-bottom"
+                    :disabled="loading.getConfiguration || loading.configureModule"
+                  >
+                  </cv-text-input>
+                  <cv-text-input
+                    :label="$t('settings.reddit_client_id')"
+                    v-model="reddit_client_id"
+                    class="mg-bottom"
+                    :disabled="loading.getConfiguration || loading.configureModule"
+                  >
+                  </cv-text-input>
+                  <cv-text-input
+                    :label="$t('settings.discord_client_id')"
+                    v-model="discord_client_id"
+                    class="mg-bottom"
+                    :disabled="loading.getConfiguration || loading.configureModule"
+                  >
+                  </cv-text-input>
+                  <cv-text-input
+                    :label="$t('settings.discord_bot_token_id')"
+                    v-model="discord_bot_token_id"
+                    class="mg-bottom"
+                    :disabled="loading.getConfiguration || loading.configureModule"
+                  >
+                  </cv-text-input>
+                  <cv-text-input
+                    :label="$t('settings.api_limit')"
+                    v-model="api_limit"
+                    class="mg-bottom"
+                    :disabled="loading.getConfiguration || loading.configureModule"
+                  >
+                  </cv-text-input>
+                  <cv-text-input
+                    :label="$t('settings.stripe_publishable_key')"
+                    v-model="stripe_publishable_key"
+                    class="mg-bottom"
+                    :disabled="loading.getConfiguration || loading.configureModule"
+                  >
+                  </cv-text-input>
+                  <cv-text-input
+                    :label="$t('settings.stripe_secret_key')"
+                    v-model="stripe_secret_key"
+                    class="mg-bottom"
+                    :disabled="loading.getConfiguration || loading.configureModule"
+                  >
+                  </cv-text-input>
+                  <cv-text-input
+                    :label="$t('settings.stripe_signing_key_connect')"
+                    v-model="stripe_signing_key_connect"
+                    class="mg-bottom"
+                    :disabled="loading.getConfiguration || loading.configureModule"
+                  >
+                  </cv-text-input>
                 </template>
               </cv-accordion-item>
             </cv-accordion>
@@ -123,8 +455,56 @@ export default {
       },
       urlCheckInterval: null,
       host: "",
+      temporal_host: "",
       isLetsEncryptEnabled: false,
       isHttpToHttpsEnabled: true,
+      // Postiz settings
+      is_general: "true",
+      next_public_upload_directory: "/uploads",
+      github_client_secret: "",
+      beehiive_api_key: "",
+      youtube_client_id: "",
+      dribbble_client_id: "",
+      facebook_app_secret: "",
+      storage_provider: "local",
+      x_api_key: "",
+      threads_app_secret: "",
+      tiktok_client_secret: "",
+      slack_secret: "",
+      linkedin_client_secret: "",
+      slack_signing_secret: "",
+      mastodon_url: "https://mastodon.social",
+      mastodon_client_secret: "",
+      next_public_polotno: "",
+      stripe_signing_key: "",
+      beehiive_publication_id: "",
+      pinterest_client_id: "",
+      dribbble_client_secret: "",
+      slack_id: "",
+      next_public_discord_support: "",
+      github_client_id: "",
+      discord_client_secret: "",
+      openai_api_key: "",
+      disable_registration: "false",
+      run_cron: "true",
+      reddit_client_secret: "",
+      fee_amount: "0.05",
+      nx_add_plugins: "false",
+      linkedin_client_id: "",
+      threads_app_id: "",
+      facebook_app_id: "",
+      youtube_client_secret: "",
+      tiktok_client_id: "",
+      pinterest_client_secret: "",
+      mastodon_client_id: "",
+      x_api_secret: "",
+      reddit_client_id: "",
+      discord_client_id: "",
+      discord_bot_token_id: "",
+      api_limit: "30",
+      stripe_publishable_key: "",
+      stripe_secret_key: "",
+      stripe_signing_key_connect: "",
       loading: {
         getConfiguration: false,
         configureModule: false,
@@ -133,6 +513,7 @@ export default {
         getConfiguration: "",
         configureModule: "",
         host: "",
+        temporal_host: "",
         lets_encrypt: "",
         http2https: "",
       },
@@ -200,8 +581,57 @@ export default {
     getConfigurationCompleted(taskContext, taskResult) {
       const config = taskResult.output;
       this.host = config.host;
+      this.temporal_host = config.temporal_host;
       this.isLetsEncryptEnabled = config.lets_encrypt;
       this.isHttpToHttpsEnabled = config.http2https;
+      
+      // Postiz settings
+      this.is_general = config.is_general || "true";
+      this.next_public_upload_directory = config.next_public_upload_directory || "/uploads";
+      this.github_client_secret = config.github_client_secret || "";
+      this.beehiive_api_key = config.beehiive_api_key || "";
+      this.youtube_client_id = config.youtube_client_id || "";
+      this.dribbble_client_id = config.dribbble_client_id || "";
+      this.facebook_app_secret = config.facebook_app_secret || "";
+      this.storage_provider = config.storage_provider || "local";
+      this.x_api_key = config.x_api_key || "";
+      this.threads_app_secret = config.threads_app_secret || "";
+      this.tiktok_client_secret = config.tiktok_client_secret || "";
+      this.slack_secret = config.slack_secret || "";
+      this.linkedin_client_secret = config.linkedin_client_secret || "";
+      this.slack_signing_secret = config.slack_signing_secret || "";
+      this.mastodon_url = config.mastodon_url || "https://mastodon.social";
+      this.mastodon_client_secret = config.mastodon_client_secret || "";
+      this.next_public_polotno = config.next_public_polotno || "";
+      this.stripe_signing_key = config.stripe_signing_key || "";
+      this.beehiive_publication_id = config.beehiive_publication_id || "";
+      this.pinterest_client_id = config.pinterest_client_id || "";
+      this.dribbble_client_secret = config.dribbble_client_secret || "";
+      this.slack_id = config.slack_id || "";
+      this.next_public_discord_support = config.next_public_discord_support || "";
+      this.github_client_id = config.github_client_id || "";
+      this.discord_client_secret = config.discord_client_secret || "";
+      this.openai_api_key = config.openai_api_key || "";
+      this.disable_registration = config.disable_registration || "false";
+      this.run_cron = config.run_cron || "true";
+      this.reddit_client_secret = config.reddit_client_secret || "";
+      this.fee_amount = config.fee_amount || "0.05";
+      this.nx_add_plugins = config.nx_add_plugins || "false";
+      this.linkedin_client_id = config.linkedin_client_id || "";
+      this.threads_app_id = config.threads_app_id || "";
+      this.facebook_app_id = config.facebook_app_id || "";
+      this.youtube_client_secret = config.youtube_client_secret || "";
+      this.tiktok_client_id = config.tiktok_client_id || "";
+      this.pinterest_client_secret = config.pinterest_client_secret || "";
+      this.mastodon_client_id = config.mastodon_client_id || "";
+      this.x_api_secret = config.x_api_secret || "";
+      this.reddit_client_id = config.reddit_client_id || "";
+      this.discord_client_id = config.discord_client_id || "";
+      this.discord_bot_token_id = config.discord_bot_token_id || "";
+      this.api_limit = config.api_limit || "30";
+      this.stripe_publishable_key = config.stripe_publishable_key || "";
+      this.stripe_secret_key = config.stripe_secret_key || "";
+      this.stripe_signing_key_connect = config.stripe_signing_key_connect || "";
 
       this.loading.getConfiguration = false;
       this.focusElement("host");
@@ -215,6 +645,14 @@ export default {
 
         if (isValidationOk) {
           this.focusElement("host");
+        }
+        isValidationOk = false;
+      }
+      if (!this.temporal_host) {
+        this.error.temporal_host = "common.required";
+
+        if (isValidationOk) {
+          this.focusElement("temporal_host");
         }
         isValidationOk = false;
       }
@@ -269,8 +707,56 @@ export default {
           action: taskAction,
           data: {
             host: this.host,
+            temporal_host: this.temporal_host,
             lets_encrypt: this.isLetsEncryptEnabled,
             http2https: this.isHttpToHttpsEnabled,
+            // Postiz settings
+            is_general: this.is_general,
+            next_public_upload_directory: this.next_public_upload_directory,
+            github_client_secret: this.github_client_secret,
+            beehiive_api_key: this.beehiive_api_key,
+            youtube_client_id: this.youtube_client_id,
+            dribbble_client_id: this.dribbble_client_id,
+            facebook_app_secret: this.facebook_app_secret,
+            storage_provider: this.storage_provider,
+            x_api_key: this.x_api_key,
+            threads_app_secret: this.threads_app_secret,
+            tiktok_client_secret: this.tiktok_client_secret,
+            slack_secret: this.slack_secret,
+            linkedin_client_secret: this.linkedin_client_secret,
+            slack_signing_secret: this.slack_signing_secret,
+            mastodon_url: this.mastodon_url,
+            mastodon_client_secret: this.mastodon_client_secret,
+            next_public_polotno: this.next_public_polotno,
+            stripe_signing_key: this.stripe_signing_key,
+            beehiive_publication_id: this.beehiive_publication_id,
+            pinterest_client_id: this.pinterest_client_id,
+            dribbble_client_secret: this.dribbble_client_secret,
+            slack_id: this.slack_id,
+            next_public_discord_support: this.next_public_discord_support,
+            github_client_id: this.github_client_id,
+            discord_client_secret: this.discord_client_secret,
+            openai_api_key: this.openai_api_key,
+            disable_registration: this.disable_registration,
+            run_cron: this.run_cron,
+            reddit_client_secret: this.reddit_client_secret,
+            fee_amount: this.fee_amount,
+            nx_add_plugins: this.nx_add_plugins,
+            linkedin_client_id: this.linkedin_client_id,
+            threads_app_id: this.threads_app_id,
+            facebook_app_id: this.facebook_app_id,
+            youtube_client_secret: this.youtube_client_secret,
+            tiktok_client_id: this.tiktok_client_id,
+            pinterest_client_secret: this.pinterest_client_secret,
+            mastodon_client_id: this.mastodon_client_id,
+            x_api_secret: this.x_api_secret,
+            reddit_client_id: this.reddit_client_id,
+            discord_client_id: this.discord_client_id,
+            discord_bot_token_id: this.discord_bot_token_id,
+            api_limit: this.api_limit,
+            stripe_publishable_key: this.stripe_publishable_key,
+            stripe_secret_key: this.stripe_secret_key,
+            stripe_signing_key_connect: this.stripe_signing_key_connect,
           },
           extra: {
             title: this.$t("settings.instance_configuration", {
