@@ -1,19 +1,19 @@
 {
   "name": "postiz",
   "description": {
-    "en": "My postiz module"
+    "en": "postiz offers everything you need to manage your social media posts, build an audience, capture leads, and grow your business faster with AI"
   },
-  "categories": [],
+  "categories": ["collaboration"],
   "authors": [
     {
-      "name": "Name Surname",
-      "email": "author@yourmail.org"
+      "name": "Genius Dynamics",
+      "email": "support@genius.ke"
     }
   ],
   "docs": {
     "documentation_url": "https://docs.postiz.com/",
-    "bug_url": "https://github.com/NethServer/dev",
-    "code_url": "https://github.com/author/ns8-postiz"
+    "bug_url": "https://github.com/geniusdynamics/dev",
+    "code_url": "https://github.com/geniusdynamics/ns8-postiz"
   },
-  "source": "ghcr.io/nethserver/postiz"
+  "source": "ghcr.io/geniusdynamics/postiz"
 }
