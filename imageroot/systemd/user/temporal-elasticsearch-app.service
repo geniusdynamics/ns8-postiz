@@ -13,7 +13,7 @@ Environment=PODMAN_SYSTEMD_UNIT=%n
 EnvironmentFile=%S/state/environment
 EnvironmentFile=-%S/state/smarthost.env
 WorkingDirectory=%S/state
-Restart=always
+Restart=on-failure
 TimeoutStopSec=70
 ExecStartPre=/bin/mkdir -p tmp
 ExecStartPre=/bin/rm -f %t/temporal-elasticsearch-app.pid %t/temporal-elasticsearch-app.ctr-id
