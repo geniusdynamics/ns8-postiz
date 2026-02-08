@@ -72,7 +72,7 @@ response = agent.tasks.run(
     data={
         "instance": os.environ["MODULE_ID"] + "-postiz-backend",
         "url": "http://127.0.0.1:" + postiz_backend,
-        "host": "api." + temporal_host,
+        "host": "api." + host,
         "http2https": h2hs,
         "lets_encrypt": le,
     },
