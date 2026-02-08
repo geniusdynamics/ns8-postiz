@@ -27,7 +27,7 @@ def generate_random_password(length):
 # just before starting systemd unit
 # agent.dump_env()
 POSTGRES_PASSWORD = generate_random_password(12)
-POSTGRES_USER = data.get("POSTGRES_USER", "postiz-user")
+POSTGRES_USER = data.get("POSTGRES_USER", "postgres")
 POSTGRES_DB = data.get("POSTGRES_DB", "postiz-db-local")
 
 postiz_postgres = {
