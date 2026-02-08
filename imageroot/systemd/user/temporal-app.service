@@ -28,7 +28,8 @@ ExecStart=/usr/bin/podman run \
     --name temporal-app \
     --volume dynamic-config:/etc/temporal/config/dynamicconfig:Z \
     --env-file temporal.env \
-    ${AUTO_SETUP_IMAGE}
+    --env BIND_ON_IP=0.0.0.0 \
+    ${SERVER_IMAGE}
 ExecStop=/usr/bin/podman stop --ignore --cidfile %t/temporal-app.ctr-id -t 10
 ExecReload=/usr/bin/podman kill -s HUP temporal-app
 SyslogIdentifier=%u
