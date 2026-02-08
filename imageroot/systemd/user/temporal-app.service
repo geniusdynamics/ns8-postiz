@@ -4,9 +4,9 @@
 #
 
 [Unit]
-Description=Podman  temporal-app.service
+Description=Podman temporal-app.service
 BindsTo=postiz.service
-After=postiz.service temporal-postgresql-app.service temporal-elasticsearch-app.service
+After=postiz.service postiz-postgresql-app.service temporal-elasticsearch-app.service
 
 [Service]
 Environment=PODMAN_SYSTEMD_UNIT=%n
@@ -18,7 +18,17 @@ TimeoutStopSec=70
 ExecStartPre=/bin/mkdir -p tmp
 ExecStartPre=/bin/rm -f %t/temporal-app.pid %t/temporal-app.ctr-id
 ExecStartPre=-runagent discover-smarthost
-ExecStart=/usr/bin/podman run --conmon-pidfile %t/temporal-app.pid  --cidfile %t/temporal-app.ctr-id --cgroups=no-conmon  --pod-id-file %t/postiz.pod-id --replace -d --name  temporal-app  --volume dynamicconfig:/etc/temporal/config/dynamicconfig:Z   --env-file temporal.env  ${AUTO_SETUP_IMAGE}  
+ExecStart=/usr/bin/podman run \
+    --conmon-pidfile %t/temporal-app.pid \
+    --cidfile %t/temporal-app.ctr-id \
+    --cgroups=no-conmon \
+    --pod-id-file %t/postiz.pod-id \
+    --replace \
+    -d \
+    --name temporal-app \
+    --volume dynamic-config:/etc/temporal/config/dynamicconfig:Z \
+    --env-file temporal.env \
+    ${AUTO_SETUP_IMAGE}
 ExecStop=/usr/bin/podman stop --ignore --cidfile %t/temporal-app.ctr-id -t 10
 ExecReload=/usr/bin/podman kill -s HUP temporal-app
 SyslogIdentifier=%u

@@ -4,7 +4,7 @@
 #
 
 [Unit]
-Description=Podman  temporal-admin-tools-app.service
+Description=Podman temporal-admin-tools-app.service
 BindsTo=postiz.service
 After=postiz.service temporal-app.service
 
@@ -18,7 +18,16 @@ TimeoutStopSec=70
 ExecStartPre=/bin/mkdir -p tmp
 ExecStartPre=/bin/rm -f %t/temporal-admin-tools-app.pid %t/temporal-admin-tools-app.ctr-id
 ExecStartPre=-runagent discover-smarthost
-ExecStart=/usr/bin/podman run --conmon-pidfile %t/temporal-admin-tools-app.pid  --cidfile %t/temporal-admin-tools-app.ctr-id --cgroups=no-conmon  --pod-id-file %t/postiz.pod-id --replace -d --name  temporal-admin-tools-app     --env-file temporal-admin-tools.env  ${ADMIN_TOOLS_IMAGE}  
+ExecStart=/usr/bin/podman run \
+    --conmon-pidfile %t/temporal-admin-tools-app.pid \
+    --cidfile %t/temporal-admin-tools-app.ctr-id \
+    --cgroups=no-conmon \
+    --pod-id-file %t/postiz.pod-id \
+    --replace \
+    -d \
+    --name temporal-admin-tools-app \
+    --env-file temporal-admin-tools.env \
+    ${ADMIN_TOOLS_IMAGE}
 ExecStop=/usr/bin/podman stop --ignore --cidfile %t/temporal-admin-tools-app.ctr-id -t 10
 ExecReload=/usr/bin/podman kill -s HUP temporal-admin-tools-app
 SyslogIdentifier=%u

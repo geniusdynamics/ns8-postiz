@@ -4,7 +4,7 @@
 #
 
 [Unit]
-Description=Podman  spotlight-app.service
+Description=Podman spotlight-app.service
 BindsTo=postiz.service
 After=postiz.service
 
@@ -18,7 +18,16 @@ TimeoutStopSec=70
 ExecStartPre=/bin/mkdir -p tmp
 ExecStartPre=/bin/rm -f %t/spotlight-app.pid %t/spotlight-app.ctr-id
 ExecStartPre=-runagent discover-smarthost
-ExecStart=/usr/bin/podman run --conmon-pidfile %t/spotlight-app.pid  --cidfile %t/spotlight-app.ctr-id --cgroups=no-conmon  --pod-id-file %t/postiz.pod-id --replace -d --name  spotlight-app     --env-file spotlight.env  ${SPOTLIGHT_IMAGE}  
+ExecStart=/usr/bin/podman run \
+    --conmon-pidfile %t/spotlight-app.pid \
+    --cidfile %t/spotlight-app.ctr-id \
+    --cgroups=no-conmon \
+    --pod-id-file %t/postiz.pod-id \
+    --replace \
+    -d \
+    --name spotlight-app \
+    --env-file spotlight.env \
+    ${SPOTLIGHT_IMAGE}
 ExecStop=/usr/bin/podman stop --ignore --cidfile %t/spotlight-app.ctr-id -t 10
 ExecReload=/usr/bin/podman kill -s HUP spotlight-app
 SyslogIdentifier=%u

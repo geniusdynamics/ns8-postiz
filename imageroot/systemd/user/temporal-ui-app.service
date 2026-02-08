@@ -4,7 +4,7 @@
 #
 
 [Unit]
-Description=Podman  temporal-ui-app.service
+Description=Podman temporal-ui-app.service
 BindsTo=postiz.service
 After=postiz.service
 
@@ -18,7 +18,16 @@ TimeoutStopSec=70
 ExecStartPre=/bin/mkdir -p tmp
 ExecStartPre=/bin/rm -f %t/temporal-ui-app.pid %t/temporal-ui-app.ctr-id
 ExecStartPre=-runagent discover-smarthost
-ExecStart=/usr/bin/podman run --conmon-pidfile %t/temporal-ui-app.pid  --cidfile %t/temporal-ui-app.ctr-id --cgroups=no-conmon  --pod-id-file %t/postiz.pod-id --replace -d --name  temporal-ui-app     --env-file temporal-ui.env  ${UI_IMAGE}  
+ExecStart=/usr/bin/podman run \
+    --conmon-pidfile %t/temporal-ui-app.pid \
+    --cidfile %t/temporal-ui-app.ctr-id \
+    --cgroups=no-conmon \
+    --pod-id-file %t/postiz.pod-id \
+    --replace \
+    -d \
+    --name temporal-ui-app \
+    --env-file temporal-ui.env \
+    ${UI_IMAGE}
 ExecStop=/usr/bin/podman stop --ignore --cidfile %t/temporal-ui-app.ctr-id -t 10
 ExecReload=/usr/bin/podman kill -s HUP temporal-ui-app
 SyslogIdentifier=%u

@@ -4,7 +4,7 @@
 #
 
 [Unit]
-Description=Podman  postiz-app.service
+Description=Podman postiz-app.service
 BindsTo=postiz.service
 After=postiz.service postiz-postgres-app.service postiz-redis-app.service
 
@@ -18,7 +18,19 @@ TimeoutStopSec=70
 ExecStartPre=/bin/mkdir -p tmp
 ExecStartPre=/bin/rm -f %t/postiz-app.pid %t/postiz-app.ctr-id
 ExecStartPre=-runagent discover-smarthost
-ExecStart=/usr/bin/podman run --conmon-pidfile %t/postiz-app.pid  --cidfile %t/postiz-app.ctr-id --cgroups=no-conmon  --pod-id-file %t/postiz.pod-id --replace -d --name  postiz-app  --volume postiz-config:/config/:Z --volume postiz-uploads:/uploads/:Z   --env-file postiz.env  ${POSTIZ_APP_IMAGE}  
+ExecStart=/usr/bin/podman run \
+    --conmon-pidfile %t/postiz-app.pid \
+    --cidfile %t/postiz-app.ctr-id \
+    --cgroups=no-conmon \
+    --pod-id-file %t/postiz.pod-id \
+    --replace \
+    -d \
+    --name postiz-app \
+    --volume postiz-config:/config/:Z \
+    --volume postiz-uploads:/uploads/:Z \
+    --env-file postiz.env \
+    --env-file postiz-app.env \
+    ${POSTIZ_APP_IMAGE}
 ExecStop=/usr/bin/podman stop --ignore --cidfile %t/postiz-app.ctr-id -t 10
 ExecReload=/usr/bin/podman kill -s HUP postiz-app
 SyslogIdentifier=%u
