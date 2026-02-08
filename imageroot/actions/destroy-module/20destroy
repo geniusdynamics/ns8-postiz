@@ -18,18 +18,26 @@ import agent.tasks
 data = json.load(sys.stdin)
 
 # Find default traefik instance for current node
-default_traefik_id = agent.resolve_agent_id('traefik@node')
+default_traefik_id = agent.resolve_agent_id("traefik@node")
 if default_traefik_id is None:
     sys.exit(2)
 
-# Remove traefik route
+### Remove traefik route
 response = agent.tasks.run(
     agent_id=default_traefik_id,
-    action='delete-route',
-    data={
-        'instance': os.environ['MODULE_ID']
-    },
+    action="delete-route",
+    data={"instance": os.environ["MODULE_ID"]},
+)
+response = agent.tasks.run(
+    agent_id=default_traefik_id,
+    action="delete-route",
+    data={"instance": os.environ["MODULE_ID"] + "-temporal-ui"},
+)
+response = agent.tasks.run(
+    agent_id=default_traefik_id,
+    action="delete-route",
+    data={"instance": os.environ["MODULE_ID"] + "-temporal-backend"},
 )
 
 # Check if traefik configuration has been successfull
-agent.assert_exp(response['exit_code'] == 0)
+agent.assert_exp(response["exit_code"] == 0)

@@ -48,7 +48,7 @@ agent.write_envfile("temporal-postgresql.env", temporal_postgresql)
 temporal = {
     "DB": "postgres12",
     "POSTGRES_PWD": POSTGRES_PASSWORD_TEMPORAL,
-    "ES_SEEDS": "temporal-elasticsearch-app.service",
+    "ES_SEEDS": "temporal-elasticsearch-app",
     "ES_VERSION": "v7",
     "TEMPORAL_NAMESPACE": "default",
     "DB_PORT": "5432",
@@ -70,4 +70,4 @@ postiz = {
     "UPLOAD_DIRECTORY": UPLOAD_DIRECTORY,
     "REDIS_URL": REDIS_URL,
 }
-agent.write_envfile("postiz_app.env", postiz)
+agent.write_envfile("postiz-app.env", postiz)
