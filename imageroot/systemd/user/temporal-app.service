@@ -6,7 +6,7 @@
 [Unit]
 Description=Podman temporal-app.service
 BindsTo=postiz.service
-After=postiz.service postiz-postgresql-app.service temporal-elasticsearch-app.service
+After=postiz.service postiz-postgres-app.service temporal-elasticsearch-app.service
 
 [Service]
 Environment=PODMAN_SYSTEMD_UNIT=%n
@@ -29,7 +29,8 @@ ExecStart=/usr/bin/podman run \
     --volume dynamic-config:/etc/temporal/config/dynamicconfig:Z \
     --env-file temporal.env \
     --env BIND_ON_IP=0.0.0.0 \
-    ${SERVER_IMAGE}
+    --env TEMPORAL_ADDRESS=temporal-app:7233 \
+    ${AUTO_SETUP_IMAGE}
 ExecStop=/usr/bin/podman stop --ignore --cidfile %t/temporal-app.ctr-id -t 10
 ExecReload=/usr/bin/podman kill -s HUP temporal-app
 SyslogIdentifier=%u

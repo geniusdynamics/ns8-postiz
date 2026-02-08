@@ -45,7 +45,7 @@ buildah config --entrypoint=/ \
 	--label="org.nethserver.authorizations=traefik@node:routeadm" \
 	--label="org.nethserver.tcp-ports-demand=3" \
 	--label="org.nethserver.rootfull=0" \
-	--label="org.nethserver.images=ghcr.io/gitroomhq/postiz-app:latest ghcr.io/getsentry/spotlight:latest docker.io/temporalio/ui:2.34.0 docker.io/postgres:17-alpine docker.io/redis:7.2 docker.io/elasticsearch:7.17.27  docker.io/temporalio/server:1.29.3 docker.io/temporalio/admin-tools:1.28.1-tctl-1.18.4-cli-1.4.1" \
+	--label="org.nethserver.images=ghcr.io/gitroomhq/postiz-app:latest ghcr.io/getsentry/spotlight:latest docker.io/temporalio/ui:2.34.0 docker.io/postgres:17-alpine docker.io/redis:7.2 docker.io/elasticsearch:7.17.27  docker.io/temporalio/auto-setup:1.29.3 docker.io/temporalio/admin-tools:1.28.1-tctl-1.18.4-cli-1.4.1" \
 	"${container}"
 # Commit the image
 buildah commit "${container}" "${repobase}/${reponame}"
