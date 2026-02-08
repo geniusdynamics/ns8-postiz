@@ -25,7 +25,7 @@ ExecStartPre=/usr/bin/podman pod create \
     --name postiz \
     --publish 127.0.0.1:${POSTIZ_PORT}:4200 \
     --publish 127.0.0.1:${TEMPORAL_UI_PORT}:8080 \
-    --publish 127.0.0.1:${TEMPORAL_BACKEND_PORT}:7233 \
+    --publish 127.0.0.1:${POSTIZ_BACKEND_PORT}:3000 \
     --replace
 ExecStart=/usr/bin/podman pod start --pod-id-file %t/postiz.pod-id
 ExecStop=/usr/bin/podman pod stop --ignore --pod-id-file %t/postiz.pod-id -t 10

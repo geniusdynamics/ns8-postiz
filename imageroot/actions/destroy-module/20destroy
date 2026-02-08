@@ -36,7 +36,7 @@ response = agent.tasks.run(
 response = agent.tasks.run(
     agent_id=default_traefik_id,
     action="delete-route",
-    data={"instance": os.environ["MODULE_ID"] + "-temporal-backend"},
+    data={"instance": os.environ["MODULE_ID"] + "-postiz-backend"},
 )
 
 # Check if traefik configuration has been successfull

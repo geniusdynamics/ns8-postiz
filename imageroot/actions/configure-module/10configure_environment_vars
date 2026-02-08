@@ -15,7 +15,7 @@ data = json.load(sys.stdin)
 
 # This is specific to you module, so you need to change it accordingly.
 # agent.dump_env()
-temporal_address = "backend." + data.get("temporal_host")
+temporal_address = "temporal-app:7233"
 host = data.get("host")
 spotlight = {}
 agent.write_envfile("spotlight.env", spotlight)
@@ -91,7 +91,7 @@ MASTODON_URL = data.get("MASTODON_URL", "https://mastodon.social")
 MASTODON_CLIENT_SECRET = data.get("MASTODON_CLIENT_SECRET", "")
 NEXT_PUBLIC_POLOTNO = data.get("NEXT_PUBLIC_POLOTNO", "")
 STRIPE_SIGNING_KEY = data.get("STRIPE_SIGNING_KEY", "")
-BACKEND_INTERNAL_URL = f"https://{host}"
+BACKEND_INTERNAL_URL = f"https://api.{host}"
 BEEHIIVE_PUBLICATION_ID = data.get("BEEHIIVE_PUBLICATION_ID", "")
 PINTEREST_CLIENT_ID = data.get("PINTEREST_CLIENT_ID", "")
 DRIBBBLE_CLIENT_SECRET = data.get("DRIBBBLE_CLIENT_SECRET", "")
@@ -100,7 +100,7 @@ NEXT_PUBLIC_DISCORD_SUPPORT = data.get("NEXT_PUBLIC_DISCORD_SUPPORT", "")
 GITHUB_CLIENT_ID = data.get("GITHUB_CLIENT_ID", "")
 DISCORD_CLIENT_SECRET = data.get("DISCORD_CLIENT_SECRET", "")
 OPENAI_API_KEY = data.get("OPENAI_API_KEY", "")
-NEXT_PUBLIC_BACKEND_URL = f"https://{host}/api"
+NEXT_PUBLIC_BACKEND_URL = f"https://api.{host}/api"
 DISABLE_REGISTRATION = data.get("DISABLE_REGISTRATION", "false")
 RUN_CRON = data.get("RUN_CRON", "true")
 REDDIT_CLIENT_SECRET = data.get("REDDIT_CLIENT_SECRET", "")
