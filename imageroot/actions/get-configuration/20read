@@ -159,11 +159,17 @@ if os.path.exists("postiz.env"):
 	config["JWT_SECRET"] = data.get("JWT_SECRET", "random string that is unique to every install - just type random characters here!") 
 	config["TEMPORAL_ADDRESS"] = data.get("TEMPORAL_ADDRESS", "temporal:7233") 
 	config["IS_GENERAL"] = data.get("IS_GENERAL", "true") 
-	config["NEXT_PUBLIC_UPLOAD_DIRECTORY"] = data.get("NEXT_PUBLIC_UPLOAD_DIRECTORY", "/uploads") 
-	config["GITHUB_CLIENT_SECRET"] = data.get("GITHUB_CLIENT_SECRET", "") 
-	config["BEEHIIVE_API_KEY"] = data.get("BEEHIIVE_API_KEY", "") 
-	config["YOUTUBE_CLIENT_ID"] = data.get("YOUTUBE_CLIENT_ID", "") 
-else: 
+ 	config["NEXT_PUBLIC_UPLOAD_DIRECTORY"] = data.get("NEXT_PUBLIC_UPLOAD_DIRECTORY", "/uploads") 
+ 	config["GITHUB_CLIENT_SECRET"] = data.get("GITHUB_CLIENT_SECRET", "") 
+ 	config["BEEHIIVE_API_KEY"] = data.get("BEEHIIVE_API_KEY", "") 
+ 	config["YOUTUBE_CLIENT_ID"] = data.get("YOUTUBE_CLIENT_ID", "")
+ 	config["EMAIL_PROVIDER"] = data.get("EMAIL_PROVIDER", "nodemailer")
+ 	config["EMAIL_HOST"] = data.get("EMAIL_HOST", "")
+ 	config["EMAIL_PORT"] = data.get("EMAIL_PORT", "465")
+ 	config["EMAIL_USER"] = data.get("EMAIL_USER", "")
+ 	config["EMAIL_PASS"] = data.get("EMAIL_PASS", "")
+ 	config["EMAIL_SECURE"] = data.get("EMAIL_SECURE", "true")
+ else:
 	config["NEXT_PUBLIC_UPLOAD_DIRECTORY"] = "/uploads" 
 	config["GITHUB_CLIENT_SECRET"] = "" 
 	config["BEEHIIVE_API_KEY"] = "" 

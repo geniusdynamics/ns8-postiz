@@ -100,7 +100,7 @@ NEXT_PUBLIC_DISCORD_SUPPORT = data.get("NEXT_PUBLIC_DISCORD_SUPPORT", "")
 GITHUB_CLIENT_ID = data.get("GITHUB_CLIENT_ID", "")
 DISCORD_CLIENT_SECRET = data.get("DISCORD_CLIENT_SECRET", "")
 OPENAI_API_KEY = data.get("OPENAI_API_KEY", "")
-NEXT_PUBLIC_BACKEND_URL = f"https://api.{host}/api"
+NEXT_PUBLIC_BACKEND_URL = f"https://api.{host}"
 DISABLE_REGISTRATION = data.get("DISABLE_REGISTRATION", "false")
 RUN_CRON = data.get("RUN_CRON", "true")
 REDDIT_CLIENT_SECRET = data.get("REDDIT_CLIENT_SECRET", "")
@@ -123,7 +123,26 @@ STRIPE_PUBLISHABLE_KEY = data.get("STRIPE_PUBLISHABLE_KEY", "")
 STRIPE_SECRET_KEY = data.get("STRIPE_SECRET_KEY", "")
 STRIPE_SIGNING_KEY_CONNECT = data.get("STRIPE_SIGNING_KEY_CONNECT", "")
 
+# Emails
+rdb = agent.redis_connect(use_replica=True)
+smtp_settings = agent.get_smarthost_settings(rdb)
+EMAIL_PROVIDER = data.get("EMAIL_PROVIDER", "nodemailer")
+EMAIL_HOST = data.get("EMAIL_HOST", smtp_settings.get('host', 'smtp.gmail.com'))
+EMAIL_PORT = data.get("EMAIL_PORT", smtp_settings.get('port', '465'))
+EMAIL_SECURE = data.get("EMAIL_SECURE", "true")
+EMAIL_USER = data.get("EMAIL_USER", smtp_settings.get('username', ''))
+EMAIL_PASS = data.get("EMAIL_PASS", smtp_settings.get('password', ''))
+
+
 postiz = {
+
+    "EMAIL_PROVIDER": EMAIL_PROVIDER,
+    "EMAIL_HOST": EMAIL_HOST,
+    "EMAIL_PORT": EMAIL_PORT,
+    "EMAIL_SECURE": EMAIL_SECURE,
+    "EMAIL_USER": EMAIL_USER,
+    "EMAIL_PASS": EMAIL_PASS,
+
     "TEMPORAL_ADDRESS": "temporal-app:7233",
     "IS_GENERAL": IS_GENERAL,
     "NEXT_PUBLIC_UPLOAD_DIRECTORY": NEXT_PUBLIC_UPLOAD_DIRECTORY,

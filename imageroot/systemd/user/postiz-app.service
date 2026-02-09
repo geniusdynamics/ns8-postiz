@@ -6,7 +6,7 @@
 [Unit]
 Description=Podman postiz-app.service
 BindsTo=postiz.service
-After=postiz.service postiz-postgres-app.service postiz-redis-app.service
+After=postiz.service postiz-postgres-app.service postiz-redis-app.service temporal-app.service
 
 [Service]
 Environment=PODMAN_SYSTEMD_UNIT=%n

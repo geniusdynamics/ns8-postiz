@@ -71,7 +71,7 @@
                 $t("settings.enabled")
               }}</template>
             </cv-toggle>
-              <!-- advanced options -->
+            <!-- advanced options -->
             <cv-accordion ref="accordion" class="maxwidth mg-bottom">
               <cv-accordion-item :open="toggleAccordion[0]">
                 <template slot="title">{{ $t("settings.advanced") }}</template>
@@ -80,322 +80,473 @@
                     :label="$t('settings.is_general')"
                     v-model="is_general"
                     class="mg-bottom"
-                    :disabled="loading.getConfiguration || loading.configureModule"
+                    :disabled="
+                      loading.getConfiguration || loading.configureModule
+                    "
                   >
                   </cv-text-input>
                   <cv-text-input
                     :label="$t('settings.next_public_upload_directory')"
                     v-model="next_public_upload_directory"
                     class="mg-bottom"
-                    :disabled="loading.getConfiguration || loading.configureModule"
+                    :disabled="
+                      loading.getConfiguration || loading.configureModule
+                    "
                   >
                   </cv-text-input>
                   <cv-text-input
                     :label="$t('settings.github_client_secret')"
                     v-model="github_client_secret"
                     class="mg-bottom"
-                    :disabled="loading.getConfiguration || loading.configureModule"
+                    :disabled="
+                      loading.getConfiguration || loading.configureModule
+                    "
                   >
                   </cv-text-input>
                   <cv-text-input
                     :label="$t('settings.beehiive_api_key')"
                     v-model="beehiive_api_key"
                     class="mg-bottom"
-                    :disabled="loading.getConfiguration || loading.configureModule"
+                    :disabled="
+                      loading.getConfiguration || loading.configureModule
+                    "
                   >
                   </cv-text-input>
                   <cv-text-input
                     :label="$t('settings.youtube_client_id')"
                     v-model="youtube_client_id"
                     class="mg-bottom"
-                    :disabled="loading.getConfiguration || loading.configureModule"
+                    :disabled="
+                      loading.getConfiguration || loading.configureModule
+                    "
                   >
                   </cv-text-input>
                   <cv-text-input
                     :label="$t('settings.dribbble_client_id')"
                     v-model="dribbble_client_id"
                     class="mg-bottom"
-                    :disabled="loading.getConfiguration || loading.configureModule"
+                    :disabled="
+                      loading.getConfiguration || loading.configureModule
+                    "
                   >
                   </cv-text-input>
                   <cv-text-input
                     :label="$t('settings.facebook_app_secret')"
                     v-model="facebook_app_secret"
                     class="mg-bottom"
-                    :disabled="loading.getConfiguration || loading.configureModule"
+                    :disabled="
+                      loading.getConfiguration || loading.configureModule
+                    "
                   >
                   </cv-text-input>
                   <cv-text-input
                     :label="$t('settings.storage_provider')"
                     v-model="storage_provider"
                     class="mg-bottom"
-                    :disabled="loading.getConfiguration || loading.configureModule"
+                    :disabled="
+                      loading.getConfiguration || loading.configureModule
+                    "
                   >
                   </cv-text-input>
                   <cv-text-input
                     :label="$t('settings.x_api_key')"
                     v-model="x_api_key"
                     class="mg-bottom"
-                    :disabled="loading.getConfiguration || loading.configureModule"
+                    :disabled="
+                      loading.getConfiguration || loading.configureModule
+                    "
                   >
                   </cv-text-input>
                   <cv-text-input
                     :label="$t('settings.threads_app_secret')"
                     v-model="threads_app_secret"
                     class="mg-bottom"
-                    :disabled="loading.getConfiguration || loading.configureModule"
+                    :disabled="
+                      loading.getConfiguration || loading.configureModule
+                    "
                   >
                   </cv-text-input>
                   <cv-text-input
                     :label="$t('settings.tiktok_client_secret')"
                     v-model="tiktok_client_secret"
                     class="mg-bottom"
-                    :disabled="loading.getConfiguration || loading.configureModule"
+                    :disabled="
+                      loading.getConfiguration || loading.configureModule
+                    "
                   >
                   </cv-text-input>
                   <cv-text-input
                     :label="$t('settings.slack_secret')"
                     v-model="slack_secret"
                     class="mg-bottom"
-                    :disabled="loading.getConfiguration || loading.configureModule"
+                    :disabled="
+                      loading.getConfiguration || loading.configureModule
+                    "
                   >
                   </cv-text-input>
                   <cv-text-input
                     :label="$t('settings.linkedin_client_secret')"
                     v-model="linkedin_client_secret"
                     class="mg-bottom"
-                    :disabled="loading.getConfiguration || loading.configureModule"
+                    :disabled="
+                      loading.getConfiguration || loading.configureModule
+                    "
                   >
                   </cv-text-input>
                   <cv-text-input
                     :label="$t('settings.slack_signing_secret')"
                     v-model="slack_signing_secret"
                     class="mg-bottom"
-                    :disabled="loading.getConfiguration || loading.configureModule"
+                    :disabled="
+                      loading.getConfiguration || loading.configureModule
+                    "
                   >
                   </cv-text-input>
                   <cv-text-input
                     :label="$t('settings.mastodon_url')"
                     v-model="mastodon_url"
                     class="mg-bottom"
-                    :disabled="loading.getConfiguration || loading.configureModule"
+                    :disabled="
+                      loading.getConfiguration || loading.configureModule
+                    "
                   >
                   </cv-text-input>
                   <cv-text-input
                     :label="$t('settings.mastodon_client_secret')"
                     v-model="mastodon_client_secret"
                     class="mg-bottom"
-                    :disabled="loading.getConfiguration || loading.configureModule"
+                    :disabled="
+                      loading.getConfiguration || loading.configureModule
+                    "
                   >
                   </cv-text-input>
                   <cv-text-input
                     :label="$t('settings.next_public_polotno')"
                     v-model="next_public_polotno"
                     class="mg-bottom"
-                    :disabled="loading.getConfiguration || loading.configureModule"
+                    :disabled="
+                      loading.getConfiguration || loading.configureModule
+                    "
                   >
                   </cv-text-input>
                   <cv-text-input
                     :label="$t('settings.stripe_signing_key')"
                     v-model="stripe_signing_key"
                     class="mg-bottom"
-                    :disabled="loading.getConfiguration || loading.configureModule"
+                    :disabled="
+                      loading.getConfiguration || loading.configureModule
+                    "
                   >
                   </cv-text-input>
                   <cv-text-input
                     :label="$t('settings.beehiive_publication_id')"
                     v-model="beehiive_publication_id"
                     class="mg-bottom"
-                    :disabled="loading.getConfiguration || loading.configureModule"
+                    :disabled="
+                      loading.getConfiguration || loading.configureModule
+                    "
                   >
                   </cv-text-input>
                   <cv-text-input
                     :label="$t('settings.pinterest_client_id')"
                     v-model="pinterest_client_id"
                     class="mg-bottom"
-                    :disabled="loading.getConfiguration || loading.configureModule"
+                    :disabled="
+                      loading.getConfiguration || loading.configureModule
+                    "
                   >
                   </cv-text-input>
                   <cv-text-input
                     :label="$t('settings.dribbble_client_secret')"
                     v-model="dribbble_client_secret"
                     class="mg-bottom"
-                    :disabled="loading.getConfiguration || loading.configureModule"
+                    :disabled="
+                      loading.getConfiguration || loading.configureModule
+                    "
                   >
                   </cv-text-input>
                   <cv-text-input
                     :label="$t('settings.slack_id')"
                     v-model="slack_id"
                     class="mg-bottom"
-                    :disabled="loading.getConfiguration || loading.configureModule"
+                    :disabled="
+                      loading.getConfiguration || loading.configureModule
+                    "
                   >
                   </cv-text-input>
                   <cv-text-input
                     :label="$t('settings.next_public_discord_support')"
                     v-model="next_public_discord_support"
                     class="mg-bottom"
-                    :disabled="loading.getConfiguration || loading.configureModule"
+                    :disabled="
+                      loading.getConfiguration || loading.configureModule
+                    "
                   >
                   </cv-text-input>
                   <cv-text-input
                     :label="$t('settings.github_client_id')"
                     v-model="github_client_id"
                     class="mg-bottom"
-                    :disabled="loading.getConfiguration || loading.configureModule"
+                    :disabled="
+                      loading.getConfiguration || loading.configureModule
+                    "
                   >
                   </cv-text-input>
                   <cv-text-input
                     :label="$t('settings.discord_client_secret')"
                     v-model="discord_client_secret"
                     class="mg-bottom"
-                    :disabled="loading.getConfiguration || loading.configureModule"
+                    :disabled="
+                      loading.getConfiguration || loading.configureModule
+                    "
                   >
                   </cv-text-input>
                   <cv-text-input
                     :label="$t('settings.openai_api_key')"
                     v-model="openai_api_key"
                     class="mg-bottom"
-                    :disabled="loading.getConfiguration || loading.configureModule"
+                    :disabled="
+                      loading.getConfiguration || loading.configureModule
+                    "
                   >
                   </cv-text-input>
                   <cv-text-input
                     :label="$t('settings.disable_registration')"
                     v-model="disable_registration"
                     class="mg-bottom"
-                    :disabled="loading.getConfiguration || loading.configureModule"
+                    :disabled="
+                      loading.getConfiguration || loading.configureModule
+                    "
                   >
                   </cv-text-input>
                   <cv-text-input
                     :label="$t('settings.run_cron')"
                     v-model="run_cron"
                     class="mg-bottom"
-                    :disabled="loading.getConfiguration || loading.configureModule"
+                    :disabled="
+                      loading.getConfiguration || loading.configureModule
+                    "
                   >
                   </cv-text-input>
                   <cv-text-input
                     :label="$t('settings.reddit_client_secret')"
                     v-model="reddit_client_secret"
                     class="mg-bottom"
-                    :disabled="loading.getConfiguration || loading.configureModule"
+                    :disabled="
+                      loading.getConfiguration || loading.configureModule
+                    "
                   >
                   </cv-text-input>
                   <cv-text-input
                     :label="$t('settings.fee_amount')"
                     v-model="fee_amount"
                     class="mg-bottom"
-                    :disabled="loading.getConfiguration || loading.configureModule"
+                    :disabled="
+                      loading.getConfiguration || loading.configureModule
+                    "
                   >
                   </cv-text-input>
                   <cv-text-input
                     :label="$t('settings.nx_add_plugins')"
                     v-model="nx_add_plugins"
                     class="mg-bottom"
-                    :disabled="loading.getConfiguration || loading.configureModule"
+                    :disabled="
+                      loading.getConfiguration || loading.configureModule
+                    "
                   >
                   </cv-text-input>
                   <cv-text-input
                     :label="$t('settings.linkedin_client_id')"
                     v-model="linkedin_client_id"
                     class="mg-bottom"
-                    :disabled="loading.getConfiguration || loading.configureModule"
+                    :disabled="
+                      loading.getConfiguration || loading.configureModule
+                    "
                   >
                   </cv-text-input>
                   <cv-text-input
                     :label="$t('settings.threads_app_id')"
                     v-model="threads_app_id"
                     class="mg-bottom"
-                    :disabled="loading.getConfiguration || loading.configureModule"
+                    :disabled="
+                      loading.getConfiguration || loading.configureModule
+                    "
                   >
                   </cv-text-input>
                   <cv-text-input
                     :label="$t('settings.facebook_app_id')"
                     v-model="facebook_app_id"
                     class="mg-bottom"
-                    :disabled="loading.getConfiguration || loading.configureModule"
+                    :disabled="
+                      loading.getConfiguration || loading.configureModule
+                    "
                   >
                   </cv-text-input>
                   <cv-text-input
                     :label="$t('settings.youtube_client_secret')"
                     v-model="youtube_client_secret"
                     class="mg-bottom"
-                    :disabled="loading.getConfiguration || loading.configureModule"
+                    :disabled="
+                      loading.getConfiguration || loading.configureModule
+                    "
                   >
                   </cv-text-input>
                   <cv-text-input
                     :label="$t('settings.tiktok_client_id')"
                     v-model="tiktok_client_id"
                     class="mg-bottom"
-                    :disabled="loading.getConfiguration || loading.configureModule"
+                    :disabled="
+                      loading.getConfiguration || loading.configureModule
+                    "
                   >
                   </cv-text-input>
                   <cv-text-input
                     :label="$t('settings.pinterest_client_secret')"
                     v-model="pinterest_client_secret"
                     class="mg-bottom"
-                    :disabled="loading.getConfiguration || loading.configureModule"
+                    :disabled="
+                      loading.getConfiguration || loading.configureModule
+                    "
                   >
                   </cv-text-input>
                   <cv-text-input
                     :label="$t('settings.mastodon_client_id')"
                     v-model="mastodon_client_id"
                     class="mg-bottom"
-                    :disabled="loading.getConfiguration || loading.configureModule"
+                    :disabled="
+                      loading.getConfiguration || loading.configureModule
+                    "
                   >
                   </cv-text-input>
                   <cv-text-input
                     :label="$t('settings.x_api_secret')"
                     v-model="x_api_secret"
                     class="mg-bottom"
-                    :disabled="loading.getConfiguration || loading.configureModule"
+                    :disabled="
+                      loading.getConfiguration || loading.configureModule
+                    "
                   >
                   </cv-text-input>
                   <cv-text-input
                     :label="$t('settings.reddit_client_id')"
                     v-model="reddit_client_id"
                     class="mg-bottom"
-                    :disabled="loading.getConfiguration || loading.configureModule"
+                    :disabled="
+                      loading.getConfiguration || loading.configureModule
+                    "
                   >
                   </cv-text-input>
                   <cv-text-input
                     :label="$t('settings.discord_client_id')"
                     v-model="discord_client_id"
                     class="mg-bottom"
-                    :disabled="loading.getConfiguration || loading.configureModule"
+                    :disabled="
+                      loading.getConfiguration || loading.configureModule
+                    "
                   >
                   </cv-text-input>
                   <cv-text-input
                     :label="$t('settings.discord_bot_token_id')"
                     v-model="discord_bot_token_id"
                     class="mg-bottom"
-                    :disabled="loading.getConfiguration || loading.configureModule"
+                    :disabled="
+                      loading.getConfiguration || loading.configureModule
+                    "
                   >
                   </cv-text-input>
                   <cv-text-input
                     :label="$t('settings.api_limit')"
                     v-model="api_limit"
                     class="mg-bottom"
-                    :disabled="loading.getConfiguration || loading.configureModule"
+                    :disabled="
+                      loading.getConfiguration || loading.configureModule
+                    "
                   >
                   </cv-text-input>
                   <cv-text-input
                     :label="$t('settings.stripe_publishable_key')"
                     v-model="stripe_publishable_key"
                     class="mg-bottom"
-                    :disabled="loading.getConfiguration || loading.configureModule"
+                    :disabled="
+                      loading.getConfiguration || loading.configureModule
+                    "
                   >
                   </cv-text-input>
                   <cv-text-input
                     :label="$t('settings.stripe_secret_key')"
                     v-model="stripe_secret_key"
                     class="mg-bottom"
-                    :disabled="loading.getConfiguration || loading.configureModule"
+                    :disabled="
+                      loading.getConfiguration || loading.configureModule
+                    "
                   >
                   </cv-text-input>
                   <cv-text-input
                     :label="$t('settings.stripe_signing_key_connect')"
                     v-model="stripe_signing_key_connect"
                     class="mg-bottom"
-                    :disabled="loading.getConfiguration || loading.configureModule"
+                    :disabled="
+                      loading.getConfiguration || loading.configureModule
+                    "
+                  >
+                  </cv-text-input>
+                  <cv-select
+                    :label="$t('settings.email_provider')"
+                    v-model="email_provider"
+                    class="mg-bottom"
+                    :disabled="
+                      loading.getConfiguration || loading.configureModule
+                    "
+                  >
+                    <cv-select-option value="nodemailer"
+                      >Nodemailer</cv-select-option
+                    >
+                    <cv-select-option value="smtp">SMTP</cv-select-option>
+                    <cv-select-option value="resend">Resend</cv-select-option>
+                  </cv-select>
+                  <cv-text-input
+                    :label="$t('settings.email_host')"
+                    v-model="email_host"
+                    class="mg-bottom"
+                    :disabled="
+                      loading.getConfiguration || loading.configureModule
+                    "
+                  >
+                  </cv-text-input>
+                  <cv-text-input
+                    :label="$t('settings.email_port')"
+                    v-model="email_port"
+                    class="mg-bottom"
+                    :disabled="
+                      loading.getConfiguration || loading.configureModule
+                    "
+                  >
+                  </cv-text-input>
+                  <cv-text-input
+                    :label="$t('settings.email_user')"
+                    v-model="email_user"
+                    class="mg-bottom"
+                    :disabled="
+                      loading.getConfiguration || loading.configureModule
+                    "
+                  >
+                  </cv-text-input>
+                  <cv-text-input
+                    :label="$t('settings.email_pass')"
+                    v-model="email_pass"
+                    class="mg-bottom"
+                    :disabled="
+                      loading.getConfiguration || loading.configureModule
+                    "
+                  >
+                  </cv-text-input>
+                  <cv-text-input
+                    :label="$t('settings.email_secure')"
+                    v-model="email_secure"
+                    class="mg-bottom"
+                    :disabled="
+                      loading.getConfiguration || loading.configureModule
+                    "
                   >
                   </cv-text-input>
                 </template>
@@ -505,6 +656,12 @@ export default {
       stripe_publishable_key: "",
       stripe_secret_key: "",
       stripe_signing_key_connect: "",
+      email_provider: "nodemailer",
+      email_host: "",
+      email_port: "465",
+      email_user: "",
+      email_pass: "",
+      email_secure: "true",
       loading: {
         getConfiguration: false,
         configureModule: false,
@@ -545,13 +702,13 @@ export default {
       // register to task error
       this.core.$root.$once(
         `${taskAction}-aborted-${eventId}`,
-        this.getConfigurationAborted
+        this.getConfigurationAborted,
       );
 
       // register to task completion
       this.core.$root.$once(
         `${taskAction}-completed-${eventId}`,
-        this.getConfigurationCompleted
+        this.getConfigurationCompleted,
       );
 
       const res = await to(
@@ -562,7 +719,7 @@ export default {
             isNotificationHidden: true,
             eventId,
           },
-        })
+        }),
       );
       const err = res[0];
 
@@ -584,10 +741,11 @@ export default {
       this.temporal_host = config.temporal_host;
       this.isLetsEncryptEnabled = config.lets_encrypt;
       this.isHttpToHttpsEnabled = config.http2https;
-      
+
       // Postiz settings
       this.is_general = config.is_general || "true";
-      this.next_public_upload_directory = config.next_public_upload_directory || "/uploads";
+      this.next_public_upload_directory =
+        config.next_public_upload_directory || "/uploads";
       this.github_client_secret = config.github_client_secret || "";
       this.beehiive_api_key = config.beehiive_api_key || "";
       this.youtube_client_id = config.youtube_client_id || "";
@@ -608,7 +766,8 @@ export default {
       this.pinterest_client_id = config.pinterest_client_id || "";
       this.dribbble_client_secret = config.dribbble_client_secret || "";
       this.slack_id = config.slack_id || "";
-      this.next_public_discord_support = config.next_public_discord_support || "";
+      this.next_public_discord_support =
+        config.next_public_discord_support || "";
       this.github_client_id = config.github_client_id || "";
       this.discord_client_secret = config.discord_client_secret || "";
       this.openai_api_key = config.openai_api_key || "";
@@ -632,6 +791,12 @@ export default {
       this.stripe_publishable_key = config.stripe_publishable_key || "";
       this.stripe_secret_key = config.stripe_secret_key || "";
       this.stripe_signing_key_connect = config.stripe_signing_key_connect || "";
+      this.email_provider = config.email_provider || "nodemailer";
+      this.email_host = config.email_host || "";
+      this.email_port = config.email_port || "465";
+      this.email_user = config.email_user || "";
+      this.email_pass = config.email_pass || "";
+      this.email_secure = config.email_secure || "true";
 
       this.loading.getConfiguration = false;
       this.focusElement("host");
@@ -688,19 +853,19 @@ export default {
       // register to task error
       this.core.$root.$once(
         `${taskAction}-aborted-${eventId}`,
-        this.configureModuleAborted
+        this.configureModuleAborted,
       );
 
       // register to task validation
       this.core.$root.$once(
         `${taskAction}-validation-failed-${eventId}`,
-        this.configureModuleValidationFailed
+        this.configureModuleValidationFailed,
       );
 
       // register to task completion
       this.core.$root.$once(
         `${taskAction}-completed-${eventId}`,
-        this.configureModuleCompleted
+        this.configureModuleCompleted,
       );
       const res = await to(
         this.createModuleTaskForApp(this.instanceName, {
@@ -757,6 +922,12 @@ export default {
             stripe_publishable_key: this.stripe_publishable_key,
             stripe_secret_key: this.stripe_secret_key,
             stripe_signing_key_connect: this.stripe_signing_key_connect,
+            email_provider: this.email_provider,
+            email_host: this.email_host,
+            email_port: this.email_port,
+            email_user: this.email_user,
+            email_pass: this.email_pass,
+            email_secure: this.email_secure,
           },
           extra: {
             title: this.$t("settings.instance_configuration", {
@@ -765,7 +936,7 @@ export default {
             description: this.$t("settings.configuring"),
             eventId,
           },
-        })
+        }),
       );
       const err = res[0];
 
