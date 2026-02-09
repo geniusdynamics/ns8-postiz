@@ -549,6 +549,263 @@
                     "
                   >
                   </cv-text-input>
+                  <cv-text-input
+                    :label="$t('settings.dub_token')"
+                    v-model="dub_token"
+                    class="mg-bottom"
+                    :disabled="
+                      loading.getConfiguration || loading.configureModule
+                    "
+                  >
+                  </cv-text-input>
+                  <cv-text-input
+                    :label="$t('settings.dub_api_endpoint')"
+                    v-model="dub_api_endpoint"
+                    class="mg-bottom"
+                    :disabled="
+                      loading.getConfiguration || loading.configureModule
+                    "
+                  >
+                  </cv-text-input>
+                  <cv-text-input
+                    :label="$t('settings.dub_short_link_domain')"
+                    v-model="dub_short_link_domain"
+                    class="mg-bottom"
+                    :disabled="
+                      loading.getConfiguration || loading.configureModule
+                    "
+                  >
+                  </cv-text-input>
+                  <cv-text-input
+                    :label="$t('settings.short_io_secret_key')"
+                    v-model="short_io_secret_key"
+                    class="mg-bottom"
+                    :disabled="
+                      loading.getConfiguration || loading.configureModule
+                    "
+                  >
+                  </cv-text-input>
+                  <cv-text-input
+                    :label="$t('settings.kutt_api_key')"
+                    v-model="kutt_api_key"
+                    class="mg-bottom"
+                    :disabled="
+                      loading.getConfiguration || loading.configureModule
+                    "
+                  >
+                  </cv-text-input>
+                  <cv-text-input
+                    :label="$t('settings.kutt_api_endpoint')"
+                    v-model="kutt_api_endpoint"
+                    class="mg-bottom"
+                    :disabled="
+                      loading.getConfiguration || loading.configureModule
+                    "
+                  >
+                  </cv-text-input>
+                  <cv-text-input
+                    :label="$t('settings.kutt_short_link_domain')"
+                    v-model="kutt_short_link_domain"
+                    class="mg-bottom"
+                    :disabled="
+                      loading.getConfiguration || loading.configureModule
+                    "
+                  >
+                  </cv-text-input>
+                  <cv-text-input
+                    :label="$t('settings.link_drip_api_key')"
+                    v-model="link_drip_api_key"
+                    class="mg-bottom"
+                    :disabled="
+                      loading.getConfiguration || loading.configureModule
+                    "
+                  >
+                  </cv-text-input>
+                  <cv-text-input
+                    :label="$t('settings.link_drip_api_endpoint')"
+                    v-model="link_drip_api_endpoint"
+                    class="mg-bottom"
+                    :disabled="
+                      loading.getConfiguration || loading.configureModule
+                    "
+                  >
+                  </cv-text-input>
+                  <cv-text-input
+                    :label="$t('settings.link_drip_short_link_domain')"
+                    v-model="link_drip_short_link_domain"
+                    class="mg-bottom"
+                    :disabled="
+                      loading.getConfiguration || loading.configureModule
+                    "
+                  >
+                  </cv-text-input>
+                  <cv-text-input
+                    :label="$t('settings.next_public_postiz_oauth_display_name')"
+                    v-model="next_public_postiz_oauth_display_name"
+                    class="mg-bottom"
+                    :disabled="
+                      loading.getConfiguration || loading.configureModule
+                    "
+                  >
+                  </cv-text-input>
+                  <cv-text-input
+                    :label="$t('settings.next_public_postiz_oauth_logo_url')"
+                    v-model="next_public_postiz_oauth_logo_url"
+                    class="mg-bottom"
+                    :disabled="
+                      loading.getConfiguration || loading.configureModule
+                    "
+                  >
+                  </cv-text-input>
+                  <cv-toggle
+                    value="postizGenericOauth"
+                    :label="$t('settings.postiz_generic_oauth')"
+                    v-model="postiz_generic_oauth"
+                    :disabled="loading.getConfiguration || loading.configureModule"
+                    class="mg-bottom"
+                  >
+                    <template slot="text-left">{{
+                      $t("settings.disabled")
+                    }}</template>
+                    <template slot="text-right">{{
+                      $t("settings.enabled")
+                    }}</template>
+                  </cv-toggle>
+                  <cv-text-input
+                    :label="$t('settings.postiz_oauth_url')"
+                    v-model="postiz_oauth_url"
+                    class="mg-bottom"
+                    :disabled="
+                      loading.getConfiguration || loading.configureModule
+                    "
+                  >
+                  </cv-text-input>
+                  <cv-text-input
+                    :label="$t('settings.postiz_oauth_auth_url')"
+                    v-model="postiz_oauth_auth_url"
+                    class="mg-bottom"
+                    :disabled="
+                      loading.getConfiguration || loading.configureModule
+                    "
+                  >
+                  </cv-text-input>
+                  <cv-text-input
+                    :label="$t('settings.postiz_oauth_token_url')"
+                    v-model="postiz_oauth_token_url"
+                    class="mg-bottom"
+                    :disabled="
+                      loading.getConfiguration || loading.configureModule
+                    "
+                  >
+                  </cv-text-input>
+                  <cv-text-input
+                    :label="$t('settings.postiz_oauth_userinfo_url')"
+                    v-model="postiz_oauth_userinfo_url"
+                    class="mg-bottom"
+                    :disabled="
+                      loading.getConfiguration || loading.configureModule
+                    "
+                  >
+                  </cv-text-input>
+                  <cv-text-input
+                    :label="$t('settings.postiz_oauth_client_id')"
+                    v-model="postiz_oauth_client_id"
+                    class="mg-bottom"
+                    :disabled="
+                      loading.getConfiguration || loading.configureModule
+                    "
+                  >
+                  </cv-text-input>
+                  <cv-text-input
+                    :label="$t('settings.postiz_oauth_client_secret')"
+                    v-model="postiz_oauth_client_secret"
+                    class="mg-bottom"
+                    :disabled="
+                      loading.getConfiguration || loading.configureModule
+                    "
+                  >
+                  </cv-text-input>
+                  <cv-text-input
+                    :label="$t('settings.postiz_oauth_scope')"
+                    v-model="postiz_oauth_scope"
+                    class="mg-bottom"
+                    :disabled="
+                      loading.getConfiguration || loading.configureModule
+                    "
+                  >
+                  </cv-text-input>
+                  <cv-text-input
+                    :label="$t('settings.cloudflare_account_id')"
+                    v-model="cloudflare_account_id"
+                    class="mg-bottom"
+                    :disabled="
+                      loading.getConfiguration || loading.configureModule
+                    "
+                  >
+                  </cv-text-input>
+                  <cv-text-input
+                    :label="$t('settings.cloudflare_access_key')"
+                    v-model="cloudflare_access_key"
+                    class="mg-bottom"
+                    :disabled="
+                      loading.getConfiguration || loading.configureModule
+                    "
+                  >
+                  </cv-text-input>
+                  <cv-text-input
+                    :label="$t('settings.cloudflare_secret_access_key')"
+                    v-model="cloudflare_secret_access_key"
+                    class="mg-bottom"
+                    :disabled="
+                      loading.getConfiguration || loading.configureModule
+                    "
+                  >
+                  </cv-text-input>
+                  <cv-text-input
+                    :label="$t('settings.cloudflare_bucketname')"
+                    v-model="cloudflare_bucketname"
+                    class="mg-bottom"
+                    :disabled="
+                      loading.getConfiguration || loading.configureModule
+                    "
+                  >
+                  </cv-text-input>
+                  <cv-text-input
+                    :label="$t('settings.cloudflare_bucket_url')"
+                    v-model="cloudflare_bucket_url"
+                    class="mg-bottom"
+                    :disabled="
+                      loading.getConfiguration || loading.configureModule
+                    "
+                  >
+                  </cv-text-input>
+                  <cv-text-input
+                    :label="$t('settings.cloudflare_region')"
+                    v-model="cloudflare_region"
+                    class="mg-bottom"
+                    :disabled="
+                      loading.getConfiguration || loading.configureModule
+                    "
+                  >
+                  </cv-text-input>
+                  <cv-text-input
+                    :label="$t('settings.next_public_sentry_dsn')"
+                    v-model="next_public_sentry_dsn"
+                    class="mg-bottom"
+                    :disabled="
+                      loading.getConfiguration || loading.configureModule
+                    "
+                  >
+                  </cv-text-input>
+                  <cv-text-input
+                    :label="$t('settings.sentry_spotlight')"
+                    v-model="sentry_spotlight"
+                    class="mg-bottom"
+                    :disabled="
+                      loading.getConfiguration || loading.configureModule
+                    "
+                  >
+                  </cv-text-input>
                 </template>
               </cv-accordion-item>
             </cv-accordion>
@@ -662,6 +919,34 @@ export default {
       email_user: "",
       email_pass: "",
       email_secure: "true",
+      dub_token: "",
+      dub_api_endpoint: "",
+      dub_short_link_domain: "",
+      short_io_secret_key: "",
+      kutt_api_key: "",
+      kutt_api_endpoint: "",
+      kutt_short_link_domain: "",
+      link_drip_api_key: "",
+      link_drip_api_endpoint: "",
+      link_drip_short_link_domain: "",
+      next_public_postiz_oauth_display_name: "",
+      next_public_postiz_oauth_logo_url: "",
+      postiz_generic_oauth: "",
+      postiz_oauth_url: "",
+      postiz_oauth_auth_url: "",
+      postiz_oauth_token_url: "",
+      postiz_oauth_userinfo_url: "",
+      postiz_oauth_client_id: "",
+      postiz_oauth_client_secret: "",
+      postiz_oauth_scope: "",
+      cloudflare_account_id: "",
+      cloudflare_access_key: "",
+      cloudflare_secret_access_key: "",
+      cloudflare_bucketname: "",
+      cloudflare_bucket_url: "",
+      cloudflare_region: "",
+      next_public_sentry_dsn: "",
+      sentry_spotlight: "",
       loading: {
         getConfiguration: false,
         configureModule: false,
@@ -797,6 +1082,34 @@ export default {
       this.email_user = config.email_user || "";
       this.email_pass = config.email_pass || "";
       this.email_secure = config.email_secure || "true";
+      this.dub_token = config.dub_token || "";
+      this.dub_api_endpoint = config.dub_api_endpoint || "";
+      this.dub_short_link_domain = config.dub_short_link_domain || "";
+      this.short_io_secret_key = config.short_io_secret_key || "";
+      this.kutt_api_key = config.kutt_api_key || "";
+      this.kutt_api_endpoint = config.kutt_api_endpoint || "";
+      this.kutt_short_link_domain = config.kutt_short_link_domain || "";
+      this.link_drip_api_key = config.link_drip_api_key || "";
+      this.link_drip_api_endpoint = config.link_drip_api_endpoint || "";
+      this.link_drip_short_link_domain = config.link_drip_short_link_domain || "";
+      this.next_public_postiz_oauth_display_name = config.next_public_postiz_oauth_display_name || "";
+      this.next_public_postiz_oauth_logo_url = config.next_public_postiz_oauth_logo_url || "";
+      this.postiz_generic_oauth = config.postiz_generic_oauth || "";
+      this.postiz_oauth_url = config.postiz_oauth_url || "";
+      this.postiz_oauth_auth_url = config.postiz_oauth_auth_url || "";
+      this.postiz_oauth_token_url = config.postiz_oauth_token_url || "";
+      this.postiz_oauth_userinfo_url = config.postiz_oauth_userinfo_url || "";
+      this.postiz_oauth_client_id = config.postiz_oauth_client_id || "";
+      this.postiz_oauth_client_secret = config.postiz_oauth_client_secret || "";
+      this.postiz_oauth_scope = config.postiz_oauth_scope || "";
+      this.cloudflare_account_id = config.cloudflare_account_id || "";
+      this.cloudflare_access_key = config.cloudflare_access_key || "";
+      this.cloudflare_secret_access_key = config.cloudflare_secret_access_key || "";
+      this.cloudflare_bucketname = config.cloudflare_bucketname || "";
+      this.cloudflare_bucket_url = config.cloudflare_bucket_url || "";
+      this.cloudflare_region = config.cloudflare_region || "";
+      this.next_public_sentry_dsn = config.next_public_sentry_dsn || "";
+      this.sentry_spotlight = config.sentry_spotlight || "";
 
       this.loading.getConfiguration = false;
       this.focusElement("host");
@@ -928,6 +1241,34 @@ export default {
             email_user: this.email_user,
             email_pass: this.email_pass,
             email_secure: this.email_secure,
+            dub_token: this.dub_token,
+            dub_api_endpoint: this.dub_api_endpoint,
+            dub_short_link_domain: this.dub_short_link_domain,
+            short_io_secret_key: this.short_io_secret_key,
+            kutt_api_key: this.kutt_api_key,
+            kutt_api_endpoint: this.kutt_api_endpoint,
+            kutt_short_link_domain: this.kutt_short_link_domain,
+            link_drip_api_key: this.link_drip_api_key,
+            link_drip_api_endpoint: this.link_drip_api_endpoint,
+            link_drip_short_link_domain: this.link_drip_short_link_domain,
+            next_public_postiz_oauth_display_name: this.next_public_postiz_oauth_display_name,
+            next_public_postiz_oauth_logo_url: this.next_public_postiz_oauth_logo_url,
+            postiz_generic_oauth: this.postiz_generic_oauth,
+            postiz_oauth_url: this.postiz_oauth_url,
+            postiz_oauth_auth_url: this.postiz_oauth_auth_url,
+            postiz_oauth_token_url: this.postiz_oauth_token_url,
+            postiz_oauth_userinfo_url: this.postiz_oauth_userinfo_url,
+            postiz_oauth_client_id: this.postiz_oauth_client_id,
+            postiz_oauth_client_secret: this.postiz_oauth_client_secret,
+            postiz_oauth_scope: this.postiz_oauth_scope,
+            cloudflare_account_id: this.cloudflare_account_id,
+            cloudflare_access_key: this.cloudflare_access_key,
+            cloudflare_secret_access_key: this.cloudflare_secret_access_key,
+            cloudflare_bucketname: this.cloudflare_bucketname,
+            cloudflare_bucket_url: this.cloudflare_bucket_url,
+            cloudflare_region: this.cloudflare_region,
+            next_public_sentry_dsn: this.next_public_sentry_dsn,
+            sentry_spotlight: this.sentry_spotlight,
           },
           extra: {
             title: this.$t("settings.instance_configuration", {
