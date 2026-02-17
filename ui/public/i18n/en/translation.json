@@ -85,7 +85,9 @@
     "api_limit": "API limit",
     "stripe_publishable_key": "Stripe publishable key",
     "stripe_secret_key": "Stripe secret key",
-    "stripe_signing_key_connect": "Stripe signing key connect"
+    "stripe_signing_key_connect": "Stripe signing key connect",
+    "restart_postiz": "Restart Postiz",
+    "restarting_postiz": "Restarting Postiz services..."
   },
   "about": {
     "title": "About"
@@ -101,7 +103,8 @@
     "get-name": "Get name",
     "list-backup-repositories": "List backup repositories",
     "list-backups": "List backups",
-    "list-installed-modules": "List installed modules"
+    "list-installed-modules": "List installed modules",
+    "restart-postiz": "Restart Postiz"
   },
   "error": {
     "error": "Error",

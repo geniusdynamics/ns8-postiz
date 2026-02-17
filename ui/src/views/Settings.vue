@@ -826,6 +826,15 @@
               :disabled="loading.getConfiguration || loading.configureModule"
               >{{ $t("settings.save") }}</NsButton
             >
+            <NsButton
+              kind="secondary"
+              :icon="Restart20"
+              :loading="loading.restartPostiz"
+              :disabled="loading.getConfiguration || loading.configureModule || loading.restartPostiz"
+              @click="restartPostiz"
+              class="mg-left"
+              >{{ $t("settings.restart_postiz") }}</NsButton
+            >
           </cv-form>
         </cv-tile>
       </cv-column>
@@ -950,10 +959,12 @@ export default {
       loading: {
         getConfiguration: false,
         configureModule: false,
+        restartPostiz: false,
       },
       error: {
         getConfiguration: "",
         configureModule: "",
+        restartPostiz: "",
         host: "",
         temporal_host: "",
         lets_encrypt: "",
@@ -1299,6 +1310,51 @@ export default {
       // reload configuration
       this.getConfiguration();
     },
+    async restartPostiz() {
+      this.loading.restartPostiz = true;
+      this.error.restartPostiz = "";
+      const taskAction = "restart-postiz";
+      const eventId = this.getUuid();
+
+      // register to task error
+      this.core.$root.$once(
+        `${taskAction}-aborted-${eventId}`,
+        this.restartPostizAborted
+      );
+
+      // register to task completion
+      this.core.$root.$once(
+        `${taskAction}-completed-${eventId}`,
+        this.restartPostizCompleted
+      );
+
+      const res = await to(
+        this.createModuleTaskForApp(this.instanceName, {
+          action: taskAction,
+          extra: {
+            title: this.$t("action." + taskAction),
+            description: this.$t("settings.restarting_postiz"),
+            eventId,
+          },
+        })
+      );
+      const err = res[0];
+
+      if (err) {
+        console.error(`error creating task ${taskAction}`, err);
+        this.error.restartPostiz = this.getErrorMessage(err);
+        this.loading.restartPostiz = false;
+        return;
+      }
+    },
+    restartPostizAborted(taskResult, taskContext) {
+      console.error(`${taskContext.action} aborted`, taskResult);
+      this.error.restartPostiz = this.$t("error.generic_error");
+      this.loading.restartPostiz = false;
+    },
+    restartPostizCompleted() {
+      this.loading.restartPostiz = false;
+    },
   },
 };
 </script>
@@ -1307,6 +1363,10 @@ export default {
 @import "../styles/carbon-utils";
 .mg-bottom {
   margin-bottom: $spacing-06;
+}
+
+.mg-left {
+  margin-left: $spacing-05;
 }
 
 .maxwidth {
