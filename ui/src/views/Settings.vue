@@ -835,6 +835,7 @@
               class="mg-left"
               >{{ $t("settings.restart_postiz") }}</NsButton
             >
+            <p class="restart-description">{{ $t("settings.restart_postiz_description") }}</p>
           </cv-form>
         </cv-tile>
       </cv-column>
@@ -1371,5 +1372,11 @@ export default {
 
 .maxwidth {
   max-width: 38rem;
+}
+
+.restart-description {
+  margin-top: $spacing-05;
+  font-size: 0.875rem;
+  color: $text-03;
 }
 </style>

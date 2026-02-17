@@ -87,6 +87,7 @@
     "stripe_secret_key": "Stripe secret key",
     "stripe_signing_key_connect": "Stripe signing key connect",
     "restart_postiz": "Restart Postiz",
+    "restart_postiz_description": "If you encounter issues with user registration or other backend operations, try restarting the Postiz services. This can help resolve connectivity and initialization problems.",
     "restarting_postiz": "Restarting Postiz services..."
   },
   "about": {
