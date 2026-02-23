@@ -14,6 +14,8 @@ images=()
 repobase="${REPOBASE:-ghcr.io/geniusdynamics}"
 # Configure the image name
 reponame="postiz"
+postiz_version="v2.19.0"
+temporalui_version="2.45.3"
 
 # Create a new empty container image
 container=$(buildah from scratch)
@@ -45,7 +47,7 @@ buildah config --entrypoint=/ \
 	--label="org.nethserver.authorizations=traefik@node:routeadm" \
 	--label="org.nethserver.tcp-ports-demand=3" \
 	--label="org.nethserver.rootfull=0" \
-	--label="org.nethserver.images=ghcr.io/gitroomhq/postiz-app:v2.19.0 ghcr.io/getsentry/spotlight:latest docker.io/temporalio/ui:2.34.0 docker.io/postgres:17-alpine docker.io/redis:7.2 docker.io/elasticsearch:7.17.27  docker.io/temporalio/auto-setup:1.29.3 docker.io/temporalio/admin-tools:1.28.1-tctl-1.18.4-cli-1.4.1" \
+	--label="org.nethserver.images=ghcr.io/gitroomhq/postiz-app:$postiz_version ghcr.io/getsentry/spotlight:latest docker.io/temporalio/ui:$temporalui_version docker.io/postgres:17-alpine docker.io/redis:7.2 docker.io/elasticsearch:7.17.27  docker.io/temporalio/auto-setup:1.29.3 docker.io/temporalio/admin-tools:1.28.1-tctl-1.18.4-cli-1.4.1" \
 	"${container}"
 # Commit the image
 buildah commit "${container}" "${repobase}/${reponame}"
