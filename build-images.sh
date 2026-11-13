@@ -14,8 +14,10 @@ images=()
 repobase="${REPOBASE:-ghcr.io/geniusdynamics}"
 # Configure the image name
 reponame="postiz"
-postiz_version="v2.19.0"
-temporalui_version="2.45.3"
+# renovate: datasource=npm packageName=corepack
+corepack_version=0.36.0
+postiz_version="v2.25.3"
+temporalui_version="2.34.0"
 
 # Create a new empty container image
 container=$(buildah from scratch)
@@ -23,7 +25,8 @@ container=$(buildah from scratch)
 # Reuse existing nodebuilder-postiz container, to speed up builds
 if ! buildah containers --format "{{.ContainerName}}" | grep -q nodebuilder-postiz; then
 	echo "Pulling NodeJS runtime..."
-	buildah from --name nodebuilder-postiz -v "${PWD}:/usr/src:Z" docker.io/library/node:lts
+	buildah from --name nodebuilder-postiz -v "${PWD}:/usr/src:Z" docker.io/library/node:26.13.0-slim
+	buildah run nodebuilder-postiz sh -c "npm install -g corepack@${corepack_version} && corepack enable"
 fi
 
 echo "Build static UI files with node..."
@@ -47,7 +50,7 @@ buildah config --entrypoint=/ \
 	--label="org.nethserver.authorizations=traefik@node:routeadm" \
 	--label="org.nethserver.tcp-ports-demand=3" \
 	--label="org.nethserver.rootfull=0" \
-	--label="org.nethserver.images=ghcr.io/gitroomhq/postiz-app:$postiz_version ghcr.io/getsentry/spotlight:latest docker.io/temporalio/ui:$temporalui_version docker.io/postgres:17-alpine docker.io/redis:7.2 docker.io/elasticsearch:7.17.27  docker.io/temporalio/auto-setup:1.29.3 docker.io/temporalio/admin-tools:1.28.1-tctl-1.18.4-cli-1.4.1" \
+	--label="org.nethserver.images=ghcr.io/gitroomhq/postiz-app:$postiz_version ghcr.io/getsentry/spotlight:4.12.1 docker.io/temporalio/ui:$temporalui_version docker.io/postgres:17.12-alpine3.24 docker.io/redis:7.2.14-alpine docker.io/elasticsearch:7.17.27  docker.io/temporalio/auto-setup:1.28.1 docker.io/temporalio/admin-tools:1.28.1-tctl-1.18.4-cli-1.4.1" \
 	"${container}"
 # Commit the image
 buildah commit "${container}" "${repobase}/${reponame}"

@@ -1,235 +1,119 @@
-# NS8 Postiz Module
+# ns8-postiz
 
-[![NethServer 8](https://img.shields.io/badge/NethServer-8-blue)](https://github.com/geniusdynamics/ns8-core)
-[![License](https://img.shields.io/badge/License-GPL--3.0-green)](LICENSE)
+postiz offers everything you need to manage your social media posts, build an audience, capture leads, and grow your business faster with AI
 
-A [NethServer 8](https://github.com/geniusdynamics/ns8-core) module that integrates **Postiz** - a powerful open-source social media scheduling tool.
+Module id: `postiz`. Images are pinned in `build-images.sh` and updated through reviewed changes.
 
-## What is Postiz?
-
-[Postiz](https://postiz.com) is a self-hosted platform that allows you to schedule and manage posts across multiple social media platforms from a single dashboard. It provides:
-
-- **Multi-platform scheduling** for Twitter/X, LinkedIn, Facebook, Instagram, Threads, TikTok, YouTube, Reddit, Discord, and more
-- **Content calendar** with visual scheduling
-- **Team collaboration** with role-based access
-- **Media library** for managing images and videos
-- **Analytics and insights** for post performance
-- **AI-powered features** for content generation
-- **Workflow automation** with Temporal
-
-This module brings Postiz's social media management capabilities to your NethServer infrastructure.
-
-## Features
-
-- 🚀 Easy scheduling across 15+ social platforms
-- 🔒 Integrated with NethServer's security model
-- 🌐 Automatic domain configuration with Traefik
-- 📊 Web-based management interface
-- 🔄 Automated workflows with Temporal
-- 🗄️ PostgreSQL and Redis for data management
-- 📱 Mobile-friendly UI
-- 🤖 AI integration ready (OpenAI)
-
-## Installation
-
-### Prerequisites
-
-- NethServer 8 cluster
-- At least 2GB RAM available
-- Docker/Podman support
-
-### Install the Module
-
-Instantiate the module with:
+## Install
 
 ```bash
 add-module ghcr.io/geniusdynamics/postiz:latest 1
 ```
 
-The output will return the instance name:
+The command returns the instance id, for example `postiz1`. Use the id NS8 returns.
 
-```json
-{
-  "module_id": "postiz1",
-  "image_name": "postiz",
-  "image_url": "ghcr.io/geniusdynamics/postiz:latest"
-}
-```
-
-## Configuration
-
-Launch `configure-module` with the following parameters:
-
-- `host`: Fully qualified domain name for Postiz
-- `temporal_host`: Fully qualified domain name for Temporal (workflow engine)
-- `http2https`: Enable/disable HTTP to HTTPS redirection (`true`/`false`)
-- `lets_encrypt`: Enable/disable Let's Encrypt certificate (`true`/`false`)
-
-### Example Configuration
+## Configure
 
 ```bash
-api-cli run configure-module --agent module/postiz1 --data - <<EOF
+api-cli run configure-module --agent module/postiz1 --data - <<'EOF'
 {
-  "host": "postiz.yourdomain.com",
-  "temporal_host": "temporal.yourdomain.com",
+  "host": "postiz.example.org",
   "http2https": true,
-  "lets_encrypt": true
+  "lets_encrypt": false
 }
 EOF
 ```
 
-This will:
+| Parameter | Required | Type | Description |
+|---|---|---|---|
+| `host` | yes | string | Host name for the application, like 'postiz.domain.org' |
+| `lets_encrypt` | yes | boolean | Request a valid Let's Encrypt certificate. |
+| `http2https` | yes | boolean | Redirect all the HTTP requests to HTTPS |
 
-- Start and configure the Postiz instance
-- Start and configure the Temporal workflow engine
-- Set up a virtual host in Traefik for external access
-- Configure automatic HTTPS if enabled
+## Configuration output
 
-### Advanced Configuration
+`get-configuration` returns: `host`, `lets_encrypt`, `http2https`.
 
-You can also configure additional parameters through the web UI or API:
+## Images
 
-- **Social Platform Integrations**: GitHub, YouTube, Dribbble, Facebook, X/Twitter, Threads, TikTok, Slack, LinkedIn, Mastodon, Pinterest, Reddit, Discord
-- **Storage Settings**: Local or cloud storage providers
-- **AI Features**: OpenAI API integration
-- **Stripe Integration**: For payment processing
-- **Registration Settings**: Enable/disable user registration
-- **API Limits**: Rate limiting configuration
+| Image | Version |
+|---|---|
+| `ghcr.io/gitroomhq/postiz-app` | `v2.25.3` |
+| `ghcr.io/getsentry/spotlight` | `4.12.1` |
+| `docker.io/temporalio/ui` | `2.34.0` |
+| `docker.io/postgres` | `17.12-alpine3.24` |
+| `docker.io/redis` | `7.2.14-alpine` |
+| `docker.io/elasticsearch` | `7.17.27` |
+| `docker.io/temporalio/auto-setup` | `1.28.1` |
+| `docker.io/temporalio/admin-tools` | `1.28.1-tctl-1.18.4-cli-1.4.1` |
 
-## Usage
+## Network and access
 
-1. **Access Postiz**: Navigate to `https://postiz.yourdomain.com`
-2. **Initial Setup**: Register your admin account
-3. **Connect Social Accounts**: Authorize your social media platforms
-4. **Schedule Posts**: Use the content calendar to plan and schedule posts
-5. **Monitor Analytics**: Track post performance and engagement
+- Reserves 3 TCP port(s) on the node. The web application is published through Traefik on the configured host name.
+- Runs rootless.
+- Declares these NS8 authorizations: `traefik@node:routeadm`.
 
-## Module Management
+## Backup
 
-### Get Configuration
+The following paths are included in the NS8 backup (`imageroot/etc/state-include.conf`):
+
+- `state/spotlight.env`
+- `state/temporal-ui.env`
+- `state/postiz-postgres.env`
+- `state/temporal-admin-tools.env`
+- `state/postiz.env`
+- `state/postiz-app.env`
+- `state/postiz-redis.env`
+- `state/temporal-elasticsearch.env`
+- `state/temporal.env`
+- `volumes/postgres-data`
+- `volumes/postiz-redis-data`
+- `volumes/elasticsearch-data`
+- `volumes/dynamicconfig`
+- `volumes/postiz-config`
+- `volumes/postiz-uploads`
+
+## Services
+
+- `postiz-app.service`
+- `postiz-postgres-app.service`
+- `postiz-redis-app.service`
+- `postiz.service`
+- `spotlight-app.service`
+- `temporal-admin-tools-app.service`
+- `temporal-app.service`
+- `temporal-elasticsearch-app.service`
+- `temporal-ui-app.service`
+
+## Get the configuration
 
 ```bash
 api-cli run get-configuration --agent module/postiz1
 ```
 
-### Update Module
-
-To update the Postiz module to the latest version:
+## Update and uninstall
 
 ```bash
 api-cli run update-module --data '{"module_url":"ghcr.io/geniusdynamics/postiz:latest","instances":["postiz1"],"force":true}'
-```
-
-This will:
-
-- Pull the latest container images
-- Restart services with the new version
-- Preserve all data and configurations
-
-### Uninstall
-
-```bash
 remove-module --no-preserve postiz1
 ```
 
-## Advanced Configuration
-
-### Smarthost Integration
-
-The module automatically discovers and integrates with NethServer's centralized [smarthost setup](https://nethserver.github.io/ns8-core/core/smarthost/). When the smarthost configuration changes, the module automatically reloads its services.
-
-### Services
-
-The module consists of multiple services:
-
-- **postiz-app**: Main Postiz application
-- **postiz-postgres**: PostgreSQL database
-- **postiz-redis**: Redis cache
-- **temporal**: Workflow engine for background jobs
-- **temporal-ui**: Temporal web interface
-- **temporal-postgresql**: Temporal database
-- **temporal-elasticsearch**: Temporal search index
-- **spotlight**: Search and analytics
-
-### Environment Variables
-
-The module runs with comprehensive environment variables managed by the NethServer agent. Key variables include database connection details, social media API keys, and security settings.
-
-## Development & Debugging
-
-### Debug Commands
-
-Check environment variables:
-
-```bash
-runagent -m postiz1 env
-```
-
-Enter the module's runtime environment:
-
-```bash
-runagent -m postiz1
-```
-
-Inspect running containers:
-
-```bash
-runagent -m postiz1
-podman ps
-```
-
-Access container environment:
-
-```bash
-podman exec postiz-app env
-```
-
-Open shell in container:
-
-```bash
-podman exec -ti postiz-app sh
-```
-
-### View Logs
-
-```bash
-runagent -m postiz1
-journalctl -u postiz-app -f
-```
-
-### UI Development
-
-The module includes a Vue.js-based web interface. For UI development:
-
-1. Navigate to the `ui/` directory
-2. Follow the [NethServer UI development guide](https://nethserver.github.io/ns8-core/ui/modules/#module-ui-development)
-
 ## Testing
 
-Test the module using the provided script:
+Continuous integration:
 
-```bash
-./test-module.sh <NODE_ADDR> ghcr.io/geniusdynamics/postiz:latest
-```
+- `Publish images` builds the module image on every push.
+- `Test module` installs the image on a QEMU NS8 node and runs the Robot Framework suite in `tests/`. It runs after `Publish images` succeeds on `dev` and on `main`.
+- `Build API JSON Schema docs` and the security scan run alongside.
 
-Tests are written using [Robot Framework](https://robotframework.org/).
+The suite installs the module, configures a host name, checks that the web application answers through Traefik, takes UI screenshots and removes the module.
 
-## Translation
+Run it locally with the NS8 standard infrastructure described in the [ns8-github-actions README](https://github.com/NethServer/ns8-github-actions/blob/v1/README.md#running-tests-locally).
 
-The UI supports multiple languages and is translated via [Weblate](https://hosted.weblate.org/projects/ns8/).
+## Upstream
 
-To contribute translations:
-
-- Add the [GitHub Weblate app](https://docs.weblate.org/en/latest/admin/continuous.html#github-setup) to your repository
-- Add your repository to [hosted.weblate.org](https://hosted.weblate.org) or request addition to the NS8 Weblate project
-
-## Support & Contributing
-
-- 📖 [NethServer Documentation](https://nethserver.github.io/ns8-core/)
-- 🐛 [Report Issues](https://github.com/geniusdynamics/ns8-postiz/issues)
-- 💬 [Community Forum](https://community.nethserver.org/)
-- 🤝 [Contributing Guide](CONTRIBUTING.md)
+Application documentation: https://docs.postiz.com/
 
 ## License
 
-This project is licensed under the GPL-3.0 License - see the [LICENSE](LICENSE) file for details.
+GPL-3.0-or-later. See [LICENSE](LICENSE).
