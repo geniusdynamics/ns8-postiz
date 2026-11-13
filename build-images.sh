@@ -16,8 +16,10 @@ repobase="${REPOBASE:-ghcr.io/geniusdynamics}"
 reponame="postiz"
 # renovate: datasource=npm packageName=corepack
 corepack_version=0.36.0
-postiz_version="v2.25.3"
-temporalui_version="2.34.0"
+# renovate: datasource=docker packageName=ghcr.io/gitroomhq/postiz-app
+postiz_version=v2.25.3
+# renovate: datasource=docker packageName=docker.io/temporalio/ui
+temporalui_version=2.34.0
 
 # Create a new empty container image
 container=$(buildah from scratch)
