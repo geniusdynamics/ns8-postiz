@@ -1,6 +1,9 @@
 *** Settings ***
 Library    SSHLibrary
 
+*** Variables ***
+${HOST}    postiz.example.org
+
 *** Test Cases ***
 Check if postiz is installed correctly
     ${output}  ${rc} =    Execute Command    add-module ${IMAGE_URL} 1
